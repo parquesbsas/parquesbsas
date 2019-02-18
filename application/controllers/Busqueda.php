@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-include_once(APPPATH.'core/My_util.php');
+//include_once(APPPATH.'core/My_util.php');
 //include_once('/../core/MY_Util.php');
-//require_once APPPATH.'/core/My_util.php';
+require_once APPPATH.'/core/My_util.php';
 
 class Busqueda extends MY_Util {
 
