@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-include_once(APPPATH.'core/MY_Util.php');
+require_once APPPATH.'/core/My_util.php';
 
 class Perfil extends MY_Util {
 
@@ -24,25 +24,25 @@ class Perfil extends MY_Util {
 		$id = $this->session->userdata["id"];
 
 		$usuario = $this->mdl_usuario->mostrarPerfil($id);
-		
+
 		if(empty($usuario)) {
 			redirect(base_url()."Error404");
 		}
 
 		$dniOpciones = $this->ordenarDniOpciones($usuario);
-		
+
 		$result["tipo_dni"] = $dniOpciones;
 		$result["result"] = $usuario;
-		
+
 		$this->load->view("/user/profile",$result);
 		$this->load->view("/guest/footer");
 
 	}
 
 	protected function ordenarDniOpciones($usuario) {
-		
+
 		$tipoDni = $this->mdl_usuario->obtenerTipoDocumento();
-		
+
 		$dniOpciones = array();
 		foreach($tipoDni as $dni) {
 			if($usuario->id_tipo_documento == $dni->id_tipo_documento) {
@@ -51,18 +51,18 @@ class Perfil extends MY_Util {
 			}
 			$dniOpciones[] = $dni;
 		}
-		
-		return $dniOpciones;	
+
+		return $dniOpciones;
 	}
 
 	public function actualizar() {
-		
+
 		if($this->input->is_ajax_request()) {
-			
+
 			$validarContraseña = $this->input->post("validar_contrasenia_act");
 
 			if(!empty($validarContraseña)) {
-				$this->form_validation->set_rules("password_act","contraseña", "trim|required|min_length[8]|max_length[16]|callback_checkPassword|xss_clean"); 
+				$this->form_validation->set_rules("password_act","contraseña", "trim|required|min_length[8]|max_length[16]|callback_checkPassword|xss_clean");
 			}
 
 			$this->form_validation->set_rules("nombre","nombre", "trim|required|callback_checkFieldName|min_length[5]|max_length[18]|xss_clean");
@@ -80,7 +80,7 @@ class Perfil extends MY_Util {
 
 				$data = array(
 					"nombre_act"			=> form_error("nombre"),
-					"apellido_act"			=> form_error("apellido"),    	
+					"apellido_act"			=> form_error("apellido"),
 					"tipo_dni_act"			=> form_error("tipo_dni"),
 					"res"					=> "error"
 				);
@@ -100,7 +100,7 @@ class Perfil extends MY_Util {
 						"res" => "error"
 					);
 				} else {
-					
+
 					$nombreActualizar = $this->input->post("nombre");
 					$apellidoActualizar = $this->input->post("apellido");
 					$contraseñaActualizar = $this->input->post("password_act");
@@ -113,7 +113,7 @@ class Perfil extends MY_Util {
 					);
 
 					if(!empty($usuarioId)) { //|| !empty($this->session->userdata["id"])) {
-						
+
 						$this->mdl_usuario->idUsuario = $usuarioId;
 						$this->mdl_usuario->nombre = trim($nombreActualizar);
 						$this->mdl_usuario->apellido  = trim($apellidoActualizar);
@@ -122,7 +122,7 @@ class Perfil extends MY_Util {
 						$this->mdl_usuario->tipoDni = preg_replace('/\s+/', '', $tipoDnipost);
 
 						$result = $this->mdl_usuario->actualizarUsuario();
-						
+
 						if($result == true) {
 							$data = array(
 								"res" => "actualizado",

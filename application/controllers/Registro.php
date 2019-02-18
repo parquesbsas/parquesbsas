@@ -1,7 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-//include_once(APPPATH.'core/MY_Util.php');
 require_once APPPATH.'/core/My_util.php';
 
 class Registro extends MY_Util {

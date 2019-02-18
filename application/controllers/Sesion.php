@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-include_once(APPPATH.'core/MY_Util.php');
+require_once APPPATH.'/core/My_util.php';
 
 class Sesion extends MY_Util {
 
@@ -9,7 +9,7 @@ class Sesion extends MY_Util {
 		parent::__construct();
 		$this->load->library("encrypt");
 	}
-	
+
 	public function login() {
 
 		if(!empty($this->session->id)) {
@@ -26,7 +26,7 @@ class Sesion extends MY_Util {
 			$this->form_validation->set_message('required' , 'El campo %s no puede estar vacio.');
 			$this->form_validation->set_message('valid_email' , 'Debe ingresar un %s valido.');
 			$this->form_validation->set_message('min_length' ,'El campo %s no puede tener menos de %s caracteres.');
-			$this->form_validation->set_message('max_length' , 'El campo %s no puede tener mas de %s caracteres.');			
+			$this->form_validation->set_message('max_length' , 'El campo %s no puede tener mas de %s caracteres.');
 
 			if($this->form_validation->run() === false) {
 
@@ -55,13 +55,13 @@ class Sesion extends MY_Util {
 						"user_name" => $user->nombre ." ". $user->apellido,
 						"google" => false
 					);
-			
+
 					$this->session->set_userdata($dataSesion);
 
 					$data = array(
 						"res" => "sesion",
 						"message" => "Bienvenido"
-					);			
+					);
 
 				} else {
 
@@ -72,11 +72,11 @@ class Sesion extends MY_Util {
 				}
 			}
 
-			echo json_encode($data);	
+			echo json_encode($data);
 
 		} else {
 			show_404();
-		}			
+		}
 	}
 
 	public function logout() {

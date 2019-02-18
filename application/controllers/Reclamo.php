@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-include_once(APPPATH.'core/MY_Util.php');
+require_once APPPATH.'/core/My_util.php';
 
 class Reclamo extends MY_Util {
 
@@ -10,7 +10,7 @@ class Reclamo extends MY_Util {
 		$this->load->model("mdl_usuario");
 		$this->load->model("mdl_reclamo");
 		$this->load->library("My_PHPMailer");
-		$this->load->library("recaptcha");		
+		$this->load->library("recaptcha");
 	}
 
 	public function index() {
@@ -95,7 +95,7 @@ class Reclamo extends MY_Util {
 							"res" => "fallo_db",
 							"message" => "Ocurrio un error al intentar registrar los datos del formulario."
 						);
-					
+
 					} elseif(is_string($result)) {
 						$data = array(
 							"res" => "error_reclamo",
@@ -105,20 +105,20 @@ class Reclamo extends MY_Util {
 				}
 			}
 
-			echo json_encode($data);	
+			echo json_encode($data);
 
 		} else show_404();
 	}
 
 	public function detalle($idReclamo = null) {
-		
+
 		if(!empty($idReclamo)) {
 			$data["info"]= " | Detalle";
 			$this->load->view("/guest/head",$data);
 			$data['logo']= 'logo.png';
 			$this->load->view("/guest/nav",$data);
 			$reclamo = $this->mdl_reclamo->mostrarReclamo($idReclamo);
-			
+
 			if(empty($reclamo)) {
 				redirect(base_url()."Error404");
 			}
@@ -135,7 +135,7 @@ class Reclamo extends MY_Util {
 		if($this->session->perfil !== "2") {
 			return redirect(base_url());
 		}
-		
+
 		$data["info"]= " | Documentos";
 		$this->load->view("/guest/head",$data);
 		$data['logo']= 'logo.png';
@@ -180,7 +180,7 @@ class Reclamo extends MY_Util {
 
 		$file = file_get_contents($rutaArchivo[0]);
 
-		ob_clean(); 
+		ob_clean();
 		force_download($nombreDocumento, $file);
 
 		/*
@@ -216,7 +216,7 @@ class Reclamo extends MY_Util {
 					"res" => "error_destinatario",
 					"message" => "Asegurese de completar al menos un destinatario (Email ONG/Comuna) con el formato de email valido."
 				);
-			
+
 			} elseif(empty($documentoMailPost)) {
 				$data = array(
 					"res" => "error",
@@ -225,12 +225,12 @@ class Reclamo extends MY_Util {
 
 			} else {
 
-				if($this->form_validation->run() === false) { 
+				if($this->form_validation->run() === false) {
 					$data = array (
 						"res" => "error",
 						"comentario_documento_email" => form_error("comentario")
 					);
-				
+
 				} else {
 
 					if($this->session->perfil !== "2") {
@@ -242,7 +242,7 @@ class Reclamo extends MY_Util {
 					} else {
 
 						$result = $this->enviarEmailDocumentoReclamo($reclamoEmailComunaPost, $reclamoOngPost, $reclamoComentarioMailPost, $documentoMailPost);
-						
+
 						if(is_string($result)) {
 							$data = array (
 								"res" => "error_envio_email",
@@ -252,7 +252,7 @@ class Reclamo extends MY_Util {
 						} else {
 
 							$result = $this->mdl_reclamo->actualizarEstadoReclamos($documentoMailPost["name"]);
-							
+
 							if($result === true) {
 								$data = array(
 									"res" => "reclamo_enviado",
@@ -270,14 +270,14 @@ class Reclamo extends MY_Util {
 								$data = array (
 									"res" => "fallo_db",
 									"message" => "Ocurrio un error al actualizar los estados del reclamo."
-								);							
+								);
 							}
 						}
 					}
 				}
 			}
 
-			echo json_encode($data);	
+			echo json_encode($data);
 
 		} else {
 

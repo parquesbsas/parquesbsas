@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-include_once(APPPATH.'core/MY_Util.php');
+require_once APPPATH.'/core/My_util.php';
 
 class Recuperar_contrasena extends MY_Util {
 
@@ -14,15 +14,15 @@ class Recuperar_contrasena extends MY_Util {
 
 	public function index() {
 
-		if($this->session->userdata('login')) { 
+		if($this->session->userdata('login')) {
 			return redirect(base_url());
 		}
-				
+
 		$data["info"] = " | Recuperar contraseña";
 		$data['logo']= 'logo.png';
-		$this->load->view("/guest/head", $data); 
-		$this->load->view("/guest/nav", $data); 
-		$this->load->view("/user/email_recuperar_contrasena"); 
+		$this->load->view("/guest/head", $data);
+		$this->load->view("/guest/nav", $data);
+		$this->load->view("/user/email_recuperar_contrasena");
 		$this->load->view("/guest/footer");
 
 	}
@@ -33,11 +33,11 @@ class Recuperar_contrasena extends MY_Util {
 			$this->form_validation->set_rules("email", "email", "trim|required|valid_email|xss_clean");
 			$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>' );
 			$this->form_validation->set_message('required', 'El campo %s no puede estar vacio.');
-			$this->form_validation->set_message('valid_email', 'Debe ingresar un %s valido.'); 
+			$this->form_validation->set_message('valid_email', 'Debe ingresar un %s valido.');
 
 			if($this->form_validation->run() === false) {
-		
-				$dataResponse = array( 	
+
+				$dataResponse = array(
 					"email_forget" => form_error("email"),
 					"res" => "error"
 				);
@@ -45,7 +45,7 @@ class Recuperar_contrasena extends MY_Util {
 
 				$captchaAnswer = $this->input->post("g-recaptcha-response");
 				$response = $this->recaptcha->verifyResponse($captchaAnswer);
-				
+
 				if($response["success"] == false) {
 					$dataResponse = array(
 						"res" => "error_captcha",
@@ -57,11 +57,11 @@ class Recuperar_contrasena extends MY_Util {
 					$email = preg_replace('/\s+/', '', $email_post);
 					$result = $this->mdl_usuario->insertarToken($email);
 					$dataResponse = $this->validarRespuestaPeticion($result);
-				}				
+				}
 
 			}
 			echo json_encode($dataResponse);
-	  
+
 		} else {
 			show_404();
 		}
@@ -93,7 +93,7 @@ class Recuperar_contrasena extends MY_Util {
 				"message" => "El email ingresado no existe."
 			);
 		}
-	}	
+	}
 
 	public function formulario($email = null, $token = null) {
 
@@ -125,23 +125,23 @@ class Recuperar_contrasena extends MY_Util {
 			$this->form_validation->set_rules("contraseña", "contraseña", "trim|required|min_length[8]|max_length[16]|callback_checkPassword|xss_clean");
 
 			$this->form_validation->set_error_delimiters('<p class="text-danger">' , '</p>' );
-			$this->form_validation->set_message('valid_email' , 'Debe ingresar un %s valido.'); 
+			$this->form_validation->set_message('valid_email' , 'Debe ingresar un %s valido.');
 			$this->form_validation->set_message('required' , 'El campo %s no puede estar vacio.');
 			$this->form_validation->set_message('min_length' ,'El campo %s no puede tener menos de %s caracteres.');
 			$this->form_validation->set_message('max_length' , 'El campo %s no puede tener mas de %s caracteres.');
- 
+
 			if($this->form_validation->run() === false) {
-		
+
 				$dataResponse = array(
 					"message" => form_error("contraseña"),
 					"res" => "error"
 				);
-	 
+
 			} else {
 
 				$captchaAnswer = $this->input->post("g-recaptcha-response");
 				$response = $this->recaptcha->verifyResponse($captchaAnswer);
-				
+
 				if($response["success"] == false) {
 					$dataResponse = array(
 						"res" => "error_captcha",
@@ -153,8 +153,8 @@ class Recuperar_contrasena extends MY_Util {
 					$contraseña = $this->input->post("contraseña");
 					$contraseña = preg_replace("/\s+/", "", $contraseña);
 					$result = $this->mdl_usuario->actualizarContraseña($contraseña, $email);
-					
-					$dataResponse = $this->validarRespuestaFormulario($result);     
+
+					$dataResponse = $this->validarRespuestaFormulario($result);
 				}
 
 			}
@@ -183,5 +183,5 @@ class Recuperar_contrasena extends MY_Util {
 				"message" => "El email no se encuentra registrado."
 			);
 		}
-	}	
+	}
 }

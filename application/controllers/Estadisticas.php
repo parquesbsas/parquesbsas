@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require_once APPPATH.'/core/My_util.php';
+//require_once APPPATH.'/core/My_util.php';
+include_once(APPPATH.'/core/My_util.php');
 
 class Estadisticas extends MY_Util {
 
