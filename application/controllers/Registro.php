@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-include_once(APPPATH.'core/MY_Util.php');
+//include_once(APPPATH.'core/MY_Util.php');
+require_once APPPATH.'/core/My_util.php';
 
 class Registro extends MY_Util {
 
@@ -14,7 +15,7 @@ class Registro extends MY_Util {
 
 	public function index() {
 
-		if($this->session->userdata('login')) { 
+		if($this->session->userdata('login')) {
 			return redirect(base_url());
 		}
 
@@ -75,7 +76,7 @@ class Registro extends MY_Util {
 
 				$captchaAnswer = $this->input->post("g-recaptcha-response");
 				$response = $this->recaptcha->verifyResponse($captchaAnswer);
-				
+
 				if($response["success"] == false) {
 					$dataResponse = array(
 						"res" => "error_captcha",
@@ -97,12 +98,12 @@ class Registro extends MY_Util {
 				}
 			}
 
-			echo(json_encode($dataResponse));		
+			echo(json_encode($dataResponse));
 		} else {
 			show_404();
 		}
 	}
-	
+
 	protected function validarRespuesta($result = null) {
 		if(is_object($result)) {
 			$result = $this->enviarEmailActivacion($result);
@@ -129,7 +130,7 @@ class Registro extends MY_Util {
 				"message" => "El email ingresado ya existe."
 			);
 		}
-	}	
+	}
 
 	//activar usuario
 	public function activar($email = null, $token = null) {
