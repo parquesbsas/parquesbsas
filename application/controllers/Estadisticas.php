@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-include_once(APPPATH.'core/MY_Util.php');
+require_once APPPATH.'/core/My_util.php';
 
 class Estadisticas extends MY_Util {
 
@@ -26,25 +26,25 @@ class Estadisticas extends MY_Util {
 			$result = $this->formatearResultadoEstadistica($result);
 		}
 		echo json_encode($result);
-	
+
 	}
 
 	public function obtenerUsuariosPorMes() {
 		$result = $this->mdl_usuario->obtenerEstadisticaUsuario();
 		if(!empty($result)) {
 			$result = $this->formatearResultadoEstadistica($result);
-		}		
+		}
 		echo json_encode($result);
-	
+
 	}
 
 	public function obtenerMayorReclamoPorMes() {
 		$result = $this->mdl_reclamo->obtenerMayorReclamoPorMes();
 		if(!empty($result)) {
 			$result = $this->formatearEstadisticaReclamoPorMes($result);
-		}		
+		}
 		echo json_encode($result);
-	
+
 	}
 
 	public function obtenerEstadisticasEncuestaPorParque() {
