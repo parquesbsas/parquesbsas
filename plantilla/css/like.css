@@ -1,0 +1,20 @@
+<style type="text/css">
+.contenedor{width:600px;margin-right:auto;margin-left:auto;font-family:Georgia;font-size:13px;line-height:135%}
+h3{color: #979797;border-bottom: 1px dotted #DDD;font-size:21px;padding:0 0 10px 0;clear:both}
+
+/*voting style */
+.votos {border:0px solid #eee;padding:10px;list-style:none;}
+
+.votos .dw_button {background: url(votos.png) -64px 0 no-repeat;float: left;height: 42px;width: 64px;cursor:pointer;margin:0 0 0 10px}
+.votos .dw_button:hover {background: url(votos.png) no-repeat -64px -42px;}
+
+.votos .up_button {background: url(votos.png) 0 0 no-repeat;float: left;height: 42px;width: 64px;cursor:pointer;}
+.votos .up_button:hover{background: url(votos.png) no-repeat 0 -42px;}
+
+.voting_btn{float:left;}
+.voting_btn span{font-size: 11px;font-family:Arial,sans-serif;margin:10px 0 0 37px;display:block;width:27px;height:22px;line-height:22px;text-align:center}
+/*
+.likes_votado{background: url(votos.png) no-repeat 0 -42px !important;}
+.hates_votado{background: url(votos.png) no-repeat -64px -42px !important;}
+*/
+</style>

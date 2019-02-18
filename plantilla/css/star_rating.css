@@ -1,0 +1,12 @@
+.stars{list-style:none;position:relative;margin:0;padding:0}
+	.voted{cursor:default !important}
+	.stars-24{width:110px; text-align:initial; display:inline-block;}
+
+	.stars li {display:block;float:left;background-repeat:no-repeat;text-indent:-9999em;margin:0;padding:0;}
+		.stars-24 li{background-image:url(stars-24.png);width:22px;height:21px;background-position:0 0}
+	
+			
+	.stars div{display:block;background-repeat:repeat-x;position:absolute;left:0;top:0;z-index:102}
+		.votes-24{background-image:url(stars-24.png);background-position:0 -21px;height:21px}
+
+	.stars span{float:left;font-size:11px;padding:2px 0 0 0;text-align:center;font-family:sans-serif;width:100%}

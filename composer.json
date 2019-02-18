@@ -1,0 +1,11 @@
+{
+    "name": "victor-/parquebsas",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Victor Paz Friaz",
+            "email": "victor.1995.18@gmail.com"
+        }
+    ],
+    "require": {}
+}
