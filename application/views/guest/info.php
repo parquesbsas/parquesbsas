@@ -40,7 +40,7 @@
 									</br>
 									<span><strong>Patio de juegos: </strong><?php echo $patioJuegos = !empty($parque->patio_juegos) ? "Si" : "No" ?></span>
 									</br>
-									<span><strong>Barrio: </strong><?php echo($parque->barrio)?></span>
+									<span><strong>Barrio: </strong><?php echo($parque->descripcion)?></span>
 									</br>
 									<span><strong>Comuna: </strong><?php echo($parque->comuna)?></span>
 									</br>

@@ -12,7 +12,7 @@ class MDL_Parque extends CI_Model {
 		if(empty($idParque) && !empty($nombreParque)) {
 			
 			$parque = $this->db->query("
-				SELECT p.id_parque, p.nombre, p.descripcion, p.direccion, p.imagen, p.patio_juegos, p.likes, p.hates, c.comuna, b.barrio, p.longitud, p.latitud, p.url_parque
+				SELECT p.id_parque, p.nombre, p.descripcion, p.direccion, p.imagen, p.patio_juegos, p.likes, p.hates, c.comuna, b.descripcion, p.longitud, p.latitud, p.url_parque
 				FROM $this->tabla p
 				LEFT JOIN comunas c ON c.id_comuna = p.id_comuna
 				LEFT JOIN barrios b ON b.id_barrio = p.id_barrio
@@ -21,7 +21,7 @@ class MDL_Parque extends CI_Model {
 
 		} else if(!empty($idParque)) {
 
-			$sql = "SELECT p.id_parque, p.nombre, p.descripcion, p.direccion, p.imagen, p.patio_juegos, p.likes, p.hates, p.id_wifi, c.comuna, c.id_comuna, b.barrio, b.id_barrio, p.longitud, p.latitud, p.url_parque, p.activo
+			$sql = "SELECT p.id_parque, p.nombre, p.descripcion, p.direccion, p.imagen, p.patio_juegos, p.likes, p.hates, p.id_wifi, c.comuna, c.id_comuna, b.descripcion, b.id_barrio, p.longitud, p.latitud, p.url_parque, p.activo
 				FROM $this->tabla p
 				LEFT JOIN comunas c ON c.id_comuna = p.id_comuna
 				LEFT JOIN barrios b ON b.id_barrio = p.id_barrio
