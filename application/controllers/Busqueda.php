@@ -1,7 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-include_once('/../core/MY_Util.php');
+include_once(APPPATH.'core/My_util.php');
+//include_once('/../core/MY_Util.php');
+//require_once APPPATH.'/core/My_util.php';
 
 class Busqueda extends MY_Util {
 
@@ -51,30 +53,30 @@ class Busqueda extends MY_Util {
 		$data["calificaciones"] = $this->mdl_calificacion->obtenerCalificaciones();
 		$this->load->view("/guest/info", $data);
 		$this->load->view("/guest/footer");
-	}	
+	}
 
 	protected function obtenerDetalleParque(&$parque, $idParque) {
-		
+
 		$this->load->model("mdl_encuesta");
 		$this->load->model("mdl_punto_verde");
 		$this->load->model("mdl_estacion_salud");
 		$this->load->model("mdl_feria_comun");
 		$this->load->model("mdl_reclamo");
 		$this->load->model("mdl_feria_itinerante");
-		$this->load->model("mdl_actividad");			
-		
+		$this->load->model("mdl_actividad");
+
 		$parque->puntos_verdes = $this->mdl_punto_verde->obtenerPuntoVerdePorParque($idParque);
 		$parque->estaciones_salud = $this->mdl_estacion_salud->obtenerEstacionSaludablePorParque($idParque);
 		$parque->reclamos = $this->mdl_reclamo->obtenerListadoReclamos();
 		$parque->ferias = array();
 		$feriasComunesParque = $this->mdl_feria_comun->obtenerFeriasComunesPorParque($idParque);
-		$feriasItinerantesParque = $this->mdl_feria_itinerante->obtenerFeriasItinerantesPorParque($idParque);	
+		$feriasItinerantesParque = $this->mdl_feria_itinerante->obtenerFeriasItinerantesPorParque($idParque);
 		$parque->actividades = $this->mdl_actividad->obtenerActividadesPorParque($idParque);
 
 		if(!empty($feriasComunesParque)) {
 			$parque->ferias["Ferias Comunes"] = $feriasComunesParque;
 		}
-		
+
 		if(!empty($feriasItinerantesParque)) {
 			$parque->ferias["Ferias Itinerantes"] = $feriasItinerantesParque;
 		}
@@ -83,7 +85,7 @@ class Busqueda extends MY_Util {
 	public function busquedaPorBarrio() {
 		//solo entra aca si es una peticion ajax
 		if($this->input->is_ajax_request()) {
-			//Validaciones  y mensajes	
+			//Validaciones  y mensajes
 			$this->form_validation->set_rules("barrio","barrio", "trim|required|callback_checkOnlyString|min_length[5]|max_length[25]|xss_clean");
 			$this->form_validation->set_error_delimiters('<p class="text-danger">' , '</p>' );
 			$this->form_validation->set_message('required' , 'El campo %s no puede estar vacio.');
@@ -109,7 +111,7 @@ class Busqueda extends MY_Util {
 					$data = array(
 						"res" =>  "exito",
 						"data" => $result,
-						"message" => "Se encontraron ". count($result) . " parque/s."						
+						"message" => "Se encontraron ". count($result) . " parque/s."
 					);
 
 				} else {
@@ -122,13 +124,13 @@ class Busqueda extends MY_Util {
 			echo json_encode($data);
 
 		} else show_404();
-	}	
+	}
 
 	public function busquedaPorComuna() {
 
 		//solo entra aca si es una peticion ajax
 		if($this->input->is_ajax_request()) {
-			//Validaciones  y mensajes	
+			//Validaciones  y mensajes
 			$this->form_validation->set_rules("comuna","comuna", "trim|required|min_length[5]|max_length[15]|xss_clean");
 			$this->form_validation->set_error_delimiters('<p class="text-danger">' , '</p>' );
 			$this->form_validation->set_message('required' , 'El campo %s no puede estar vacio.');
@@ -174,7 +176,7 @@ class Busqueda extends MY_Util {
 
 		if(empty($parques)) {
 			redirect(base_url()."Error404");
-		}		
+		}
 
 		$data["info"]= "";
 		$this->load->view("/guest/head", $data);
@@ -184,7 +186,7 @@ class Busqueda extends MY_Util {
 		$this->load->view("/guest/busqueda_parque", $data);
 		$this->load->view("/guest/footer");
 
-	}	
+	}
 
 	public function barrio() {
 		$data["info"]= " | Barrio";
