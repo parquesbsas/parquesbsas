@@ -16,13 +16,11 @@ if(window.screen.availWidth == 640)window.parent.document.body.style.zoom="60%"
 
                //  var_dump($this->session->userdata); ?>
             <h1>Parques Bs As</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisici eli.</p>
             <br>
             <br>
            <?php }else{?>
 
  <h1>Parques Bs As</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisici eli.</p>
             <br>
             <br>
  <a class="btn btn-lg btn-primary" href="<?=base_url()?>registro">Registrarse</a>
