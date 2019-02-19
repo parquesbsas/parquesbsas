@@ -30,7 +30,7 @@ class MDL_Encuesta extends CI_Model {
 
 		$sql = "INSERT INTO $this->tablaEncuestaUsuarioParque (id_usuario, id_encuesta, id_calificacion, id_parque, fecha_creacion)
 				VALUES ( ". $this->db->escape_str($this->idUsuario) .", ". $this->db->escape_str($this->idTipoEncuesta) .", ". $this->db->escape_str($this->calificacion) .", ". $this->db->escape_str($this->idParque) .",  ". $this->db->escape($this->fechaCreacion) .");";
-		var_dump($this->db->query($sql), $sql);die;
+
 		if($this->db->query($sql)) {
 			return true;
 		} else {
