@@ -5,20 +5,19 @@
             <img src="https://ununsplash.imgix.net/photo-1413912623716-e6c688db0383?w=1024&amp;q=50&amp;fm=jpg&amp;s=2777ec88322e8725978f0fa956735021" class="img-responsive img-rounded">
           </div>
           <div class="col-md-6">
-            <h1>A title</h1>
+            <h1>Descripción</h1>
               <?/* echo '<a href="'.$authUrl.'">sds</a>';
                  $redirectUrl  =base_url().'user_authentication/';
                   echo $redirectUrl;
                  */?>
-            <h3>A subtitle</h3>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-              ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
-              dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies
-              nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-              Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In
-              enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
-              felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
-              elementum semper nisi.</p>
+            <p>Nos centramos en brindar información completa y útil acerca de los
+              espacios públicos verdes (parques) que se encuentran en la Ciudad Autónoma de
+              Buenos Aires como su información básica (dirección, barrio, etc), actividades, si se
+              relacionan con mercados, ferias, etc.
+            </p>
+            <p>
+              A su vez también les damos la posibilidad a los usuarios registrados la participación de los mediante propuestas y votos para la generación de reclamos que se enviarán hacía las ONGs o las comunas correspondientes de cada parque. Estos podrán generarse tanto desde este sitio como desde la aplicación mobile.
+            </p>
           </div>
         </div>
       </div>
@@ -27,19 +26,11 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <h1>A title</h1>
-            <h3>A subtitle</h3>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-              ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
-              dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies
-              nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-              Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In
-              enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
-              felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
-              elementum semper nisi.</p>
+            <h1>Aplicación mobile</h1>
+            <p>Con la aplicación mobile podrás generar reclamos más personalizados desde donde te encuentres. Podrás elegir un reclamo, tomar una foto de la incidencia, agregar comentarios y enviarla. Esto generará un impacto mayor al momento de seleccionar los reclamos más relevantes. Al momento de sacar la foto recordá tener activado el GPS para obtener la ubicación de la incidencia!</p>
           </div>
           <div class="col-md-6">
-            <img src="https://unsplash.imgix.net/photo-1423683249427-8ca22bd873e0?w=1024&amp;q=50&amp;fm=jpg&amp;s=5e57c661d0f772ce269188a6f5325708" class="img-responsive img-rounded">
+            <img src="../../../public/img/imagenCeluFondo.png" class="img-responsive img-rounded">
           </div>
         </div>
       </div>
