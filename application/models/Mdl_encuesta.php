@@ -15,8 +15,6 @@ class MDL_Encuesta extends CI_Model {
 
 	public function realizarEncuestaParque() {
 
-		var_dump($this);die;
-
 		if(empty($this->idParque) || empty($this->idUsuario) || empty($this->idTipoEncuesta) || empty($this->calificacion)) {
 			return null;
 		}
@@ -31,7 +29,7 @@ class MDL_Encuesta extends CI_Model {
 		}
 
 		$sql = "INSERT INTO $this->tablaEncuestaUsuarioParque (id_usuario, id_encuesta, id_calificacion, id_parque, fecha_creacion)
-				VALUES ( ". $this->db->escape($this->idUsuario) .", ". $this->db->escape($this->idTipoEncuesta) .", ". $this->db->escape($this->calificacion) .", ". $this->db->escape($this->idParque) .",  ". $this->db->escape($this->fechaCreacion) .");";
+				VALUES ( ". $this->db->escape_str($this->idUsuario) .", ". $this->db->escape_str($this->idTipoEncuesta) .", ". $this->db->escape($this->calificacion) .", ". $this->db->escape_str($this->idParque) .",  ". $this->db->escape($this->fechaCreacion) .");";
 
 		if($this->db->query($sql)) {
 			return true;
