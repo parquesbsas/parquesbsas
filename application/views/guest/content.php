@@ -2,7 +2,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
-            <img src="https://ununsplash.imgix.net/photo-1413912623716-e6c688db0383?w=1024&amp;q=50&amp;fm=jpg&amp;s=2777ec88322e8725978f0fa956735021" class="img-responsive img-rounded">
+            <img src="../../../public/img/parques/de_las_ciencias.jpg" class="img-responsive img-rounded">
           </div>
           <div class="col-md-6">
             <h1>Descripción</h1>
