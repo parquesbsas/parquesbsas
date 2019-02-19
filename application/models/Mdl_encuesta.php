@@ -16,10 +16,13 @@ class MDL_Encuesta extends CI_Model {
 	public function realizarEncuestaParque() {
 
 		if(empty($this->idParque) || empty($this->idUsuario) || empty($this->idTipoEncuesta) || empty($this->calificacion)) {
+			var_dump($this);die;
 			return null;
 		}
 
 		$respuestaValidar = $this->validarTiempoEncuesta();
+
+		var_dump($respuestaValidar);die;
 
 		if(is_null($respuestaValidar)) {
 			return "Usted ya ha realizado esta encuesta en este parque, debera esperar el siguiente mes para volver a realizar la encuesta.";
