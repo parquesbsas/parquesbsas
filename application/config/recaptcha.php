@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-$config['recaptcha_sitekey'] = "6LfA1VQUAAAAAIZabwGhgpjA95N0q2IdRv8aMfbQ";
-$config['recaptcha_secretkey'] = "6LfA1VQUAAAAALZD-uY66FRbf4aknoxTqyFn1kzh";
+$config['recaptcha_sitekey'] = "6LdOW5IUAAAAAN-QRcMLF-W5ieJSIcNr3rYtGV1L";
+$config['recaptcha_secretkey'] = "6LdOW5IUAAAAADWEDw1SLCdqDdiPwiK5Efj_thvm";
 $config['lang'] = "es";
 ?>
