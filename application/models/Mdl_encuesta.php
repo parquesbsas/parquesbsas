@@ -15,15 +15,17 @@ class MDL_Encuesta extends CI_Model {
 
 	public function realizarEncuestaParque() {
 
+		var_dump($this);die;
+
 		if(empty($this->idParque) || empty($this->idUsuario) || empty($this->idTipoEncuesta) || empty($this->calificacion)) {
 			return null;
 		}
-		
+
 		$respuestaValidar = $this->validarTiempoEncuesta();
 
 		if(is_null($respuestaValidar)) {
 			return "Usted ya ha realizado esta encuesta en este parque, debera esperar el siguiente mes para volver a realizar la encuesta.";
-		
+
 		} elseif ($respuestaValidar === false) {
 			return false;
 		}
@@ -39,7 +41,7 @@ class MDL_Encuesta extends CI_Model {
 	}
 
 	protected function validarTiempoEncuesta() {
-		
+
 		$fechaHoy = date("m");
 		$sql = "SELECT MAX(fecha_creacion) fecha_creacion FROM $this->tablaEncuestaUsuarioParque WHERE id_usuario = ". $this->db->escape_str($this->idUsuario) ." and id_encuesta = ". $this->db->escape_str($this->idTipoEncuesta) ." and id_parque = ". $this->db->escape_str($this->idParque) ."";
 		$queryResult = $this->db->query($sql);
@@ -56,7 +58,7 @@ class MDL_Encuesta extends CI_Model {
 
 		$fechaEncuestaUnix = strtotime($result->fecha_creacion);
 		$fechaEncuesta = date("m", $fechaEncuestaUnix);
-	
+
 		if($fechaHoy > $fechaEncuesta) {
 			return true;
 		}
