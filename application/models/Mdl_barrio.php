@@ -6,7 +6,7 @@ class MDL_Barrio extends CI_Model {
 	private $tabla = "barrios";
 
 	public function obtenerBarrios() {
-		$resultQuery = $this->db->query("SELECT id_barrio, descripcion FROM $this->tabla")->result();
+		$resultQuery = $this->db->query("SELECT id_barrio, descripcion as barrio FROM $this->tabla")->result();
 		return $resultQuery;
 	}
 

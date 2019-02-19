@@ -31,7 +31,7 @@
 									<?php } else {?>
 										<br><br><br>
 									<?}?>
-						
+
 									<span><strong>Descripcion: </strong>
 									</br>
 									<?php echo($parque->descripcion)?></span>
@@ -40,7 +40,7 @@
 									</br>
 									<span><strong>Patio de juegos: </strong><?php echo $patioJuegos = !empty($parque->patio_juegos) ? "Si" : "No" ?></span>
 									</br>
-									<span><strong>Barrio: </strong><?php echo($parque->descripcion)?></span>
+									<span><strong>Barrio: </strong><?php echo($parque->barrio)?></span>
 									</br>
 									<span><strong>Comuna: </strong><?php echo($parque->comuna)?></span>
 									</br>
@@ -81,7 +81,7 @@
 						<p class="text-center"><a class="btn btn-primary" id="mod_estacion_saludable">Ver Informacion</a></p>
 					</div>
 				</div>
-			<?php } if(!empty($parque->ferias)) {?>		
+			<?php } if(!empty($parque->ferias)) {?>
 				<div class="col-md-4" id="caja_ferias">
 					<div class="thumbnail" style= "background-color: #FFFFFF;">
 						<h3 class="text-center" style="color: #000000;border-bottom: none;">Ferias comunes e itinerantes</h3>
@@ -94,7 +94,7 @@
 						<p class="text-center"><a class="btn btn-primary" id="mod_ferias">Ver Informacion</a></p>
 					</div>
 				</div>
-			<?php } if(!empty($parque->actividades)) {?>	
+			<?php } if(!empty($parque->actividades)) {?>
 				<div class="col-md-4" id="caja_actividades">
 					<div class="thumbnail" style= "background-color: #FFFFFF;">
 						<h3 class="text-center" style="color: #000000;border-bottom: none;">Actividades</h3>
@@ -133,7 +133,7 @@
 						<hr>
 						<br>
 						<p class="text-center" style="font-weight: bold">Completa el formulario ingresando el tipo de reclamo, una imagen como evidencia y comentarios.
-						<br>Esto nos servira para darle mas peso a tus denuncias.	 
+						<br>Esto nos servira para darle mas peso a tus denuncias.
 						</p>
 						<br>
 						<hr>
@@ -150,7 +150,7 @@
 				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
 </div>
 
 
@@ -160,7 +160,7 @@
 		<div class="modal-content">
 
 			<?php $attributes = array("name" => "form-user-claim", "id" => "form-user-claim", "role" => "form-group", "method"=>"POST", "enctype" => "multipart/form-data");
-			echo form_open_multipart("reclamo/crear", $attributes);?>			
+			echo form_open_multipart("reclamo/crear", $attributes);?>
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						<h4 class="modal-title" style="color: #000000;">
@@ -234,8 +234,8 @@
 						<div id="contenedor_estadisticas_cantidad_reclamos">
 							<canvas id="chart_estadistica_encuesta_parque" width="840" height="440"></canvas>
 						</div>
-						<p id="id_parque_estadisticas_encuestas" value="<?echo $parque->id_parque;?>"></p>			
-					</div>	
+						<p id="id_parque_estadisticas_encuestas" value="<?echo $parque->id_parque;?>"></p>
+					</div>
 					<div class="col-md-6">
 						<img style="width:200px; height:200px;" src="<?echo base_url('public/img/icono_encuesta.png')?>" class="img-responsive img-rounded center-block">
 						<br><hr><br><br>
@@ -246,7 +246,7 @@
 				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
 </div>
 
 <!-- Ventana Modal Encuestas-->
@@ -254,7 +254,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<?php $attributes = array("name" => "form-user-encuesta", "id" => "form-user-encuesta", "role" => "form-group", "method"=>"POST", "enctype" => "multipart/form-data");
-			echo form_open_multipart("encuesta/realizar", $attributes);?>			
+			echo form_open_multipart("encuesta/realizar", $attributes);?>
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						<h4 class="modal-title" style="color: #000000;">
@@ -319,7 +319,7 @@
 			encuesta.push(item.descripcion);
 			total.push(item.total);
 		});
-		
+
 		var ctx = $("#chart_estadistica_encuesta_parque");
 		var myChart = new Chart(ctx, {
 			type: 'bar',
@@ -343,7 +343,7 @@
 					}]
 				}
 			}
-		});		
+		});
 	});
 </script>
 
@@ -363,7 +363,7 @@
 			$('#caja_actividades img').width("750px").height("350px");
 			$('#caja_ferias img').width("750px").height("350px");
 			$('#caja_estaciones_salud img').width("750px").height("350px");
-			
+
 			console.log(document.getElementById("caja_actividades"));
 		}
 	});
@@ -429,7 +429,7 @@
 							<center>
 								<a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel" href="#panel-element-ferias-<?echo($init2)?>"><?php echo($nombreFeria)?>
 								</a>
-							</center>	
+							</center>
 						</div>
 						<div id="panel-element-ferias-<?echo($init2)?>" class="panel-collapse collapse">
 							</br>
@@ -455,7 +455,7 @@
 		</div>
 	</div>
 </div>
- 
+
 <!-- ventana modal actividades -->
 <div id="modal_actividades" class="modal fade" aria-hidden="true">
 	<div class="modal-dialog">
@@ -480,7 +480,7 @@
 							<center>
 								<a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel" href="#panel-element-activity-<?echo($init)?>"><?php echo($nombreActivadad)?>
 								</a>
-							</center>	
+							</center>
 						</div>
 						<div id="panel-element-activity-<?echo($init)?>" class="panel-collapse collapse">
 							</br>
