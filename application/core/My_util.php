@@ -7,7 +7,7 @@ class MY_Util extends CI_Controller {
 		"01" => "Enero",
 		"02" => "Febrero",
 		"03" => "Marzo",
-		"04" => "Abril", 
+		"04" => "Abril",
 		"05" => "Mayo",
 		"06" => "Junio",
 		"07" => "Julio",
@@ -16,19 +16,19 @@ class MY_Util extends CI_Controller {
 		"10" => "Octubre",
 		"11" => "Noviembre",
 		"12" => "Diciembre"
-	);	
+	);
 
 	public function __construct() {
 		parent::__construct();
 	}
 
 	public function checkOnlyString($data = null) {
-		
+
 		if(empty($data) || !preg_match("/^[\p{L}\s]+$/ui", $data)) {
 			$this->form_validation->set_message("checkOnlyString", "El campo %s acepta solo carateres alfabeticos.");
 			return false;
-		} 
-		
+		}
+
 		return true;
 	}
 
@@ -76,9 +76,9 @@ class MY_Util extends CI_Controller {
 
 			$this->form_validation->set_message('checkNumberDocument', 'Usted no eligio un tipo de documento.');
 			return false;
-		
+
 			// VALIDO DNI
-		} elseif($numeroDocumento != null and $tipoDocumento == "1") { 
+		} elseif($numeroDocumento != null and $tipoDocumento == "1") {
 
 			//valido solo numeros
 			if(!preg_match('/^[0-9 .\-]+$/i', $numeroDocumento)) {
@@ -141,9 +141,7 @@ class MY_Util extends CI_Controller {
 	}
 
 	protected function enviarEmailActivacion($usuario) {
-		//$mail->Username   = "pepeveraz160@gmail.com";
-		//$mail->Password   = "bokita1808";
-		$usuario->email = "victor.1995.18@gmail.com";
+
 		$data = array();
 		$data["usuario"] = $usuario;
 
@@ -157,32 +155,29 @@ class MY_Util extends CI_Controller {
 		$mail->Host = "smtp.gmail.com";
 		$mail->SMTPAuth	= true;
 		$mail->Port = 465;
-		$mail->Username = "prueba.p5256@gmail.com";
-		$mail->Password = "Parques12345";
+		$mail->Username = "parquesbsas@gmail.com";
+		$mail->Password = "Parquesbsas2019!";
 		$mail->SMTPSecure = "ssl";
-		$mail->SetFrom('parquesboth@both.com');
+		$mail->SetFrom('parquesbsas@gmail.com');
 		$mail->AddAddress($usuario->email);
-		$mail->AddReplyTo("admin@admin.com");
+		$mail->AddReplyTo("parquesbsas@gmail.com");
 		$mail->Subject = "Activar Cuenta en Parques Bs As";
 		$mail->AddEmbeddedImage($rutaLogoImage, "logo");
 		$mail->AddEmbeddedImage($rutaGoogleImage, "google");
 		$mail->AddEmbeddedImage($rutaWebImage, "web");
 		$mail->Body = $this->load->view("/guest/email_template", $data, true);
 		$mail->IsHTML(true);
-		
+
 		if(!$mail->send()) {
-			return "Error al enviar el email: ". $mail->ErrorInfo ." | Si el problema persiste contactenos a traves del email parquesbsas.contacto@gmail.com";
+			return "Error al enviar el email: Si el problema persiste contactenos a traves del email parquesbsas@gmail.com";
 		} else {
 			return true;
 		}
 	}
 
 	protected function enviarEmailRecuperarContraseña($usuario) {
-		//$mail->Username   = "pepeveraz160@gmail.com";
-		//$mail->Password   = "bokita1808";
-		$usuario->email = "victor.1995.18@gmail.com";
 		$data = array();
-		$data["usuario"] = $usuario;		
+		$data["usuario"] = $usuario;
 
 		$rutaLogoImage = dirname(dirname(__DIR__)). "/public/img/logo.png";
 
@@ -193,18 +188,18 @@ class MY_Util extends CI_Controller {
 		$mail->Host = "smtp.gmail.com";
 		$mail->SMTPAuth = true;
 		$mail->Port = 465;
-		$mail->Username = "prueba.p5256@gmail.com";
-		$mail->Password = "Parques12345";
+		$mail->Username = "parquesbsas@gmail.com";
+		$mail->Password = "Parquesbsas2019!";
 		$mail->SMTPSecure = "ssl";
-		$mail->SetFrom('parquesboth@both.com');
+		$mail->SetFrom('parquesbsas@gmail.com');
 		$mail->AddAddress($usuario->email);
-		$mail->AddReplyTo("admin@admin.com");
+		$mail->AddReplyTo("parquesbsas@gmail.com");
 		$mail->Subject = "Recuperar Contraseña";
 		$mail->AddEmbeddedImage($rutaLogoImage, "logo");
-		$mail->Body = $this->load->view("/guest/contrasena_template", $data, true);	
+		$mail->Body = $this->load->view("/guest/contrasena_template", $data, true);
 		$mail->IsHTML(true);
 		if(!$mail->send()) {
-			return "Error al enviar el email: ". $mail->ErrorInfo ." | Si el problema persiste contactenos a traves del email parquesbsas.contacto@gmail.com";
+			return "Error al enviar el email: Si el problema persiste contactenos a traves del email parquesbsas.contacto@gmail.com";
 		} else {
 			return true;
 		}
@@ -242,7 +237,7 @@ class MY_Util extends CI_Controller {
 			if($añoActual != $añoRegistro) {
 				unset($resultQuery[$key]);
 				continue;
-			}			
+			}
 
 			$date = date("m", strtotime($value->fecha_creacion));
 			$value->fecha_creacion = static::$meses[$date];
@@ -252,7 +247,7 @@ class MY_Util extends CI_Controller {
 
 	protected function armarEstructuraPorMes($resultQuery) {
 		$result = array();
-	
+
 		foreach($resultQuery as $key => $value) {
 			$result[$value->fecha_creacion][$key] = $value;
 		}
@@ -292,7 +287,7 @@ class MY_Util extends CI_Controller {
 		}
 
 		$reclamo = $this->db->query("SELECT descripcion FROM reclamos WHERE id_reclamo = ".$this->db->escape($datos[0])."")->row();
-		
+
 		$data = array();
 
 		$data["parque"] = str_replace("_", " ", $datos[1]); // replace all "_" with space
@@ -307,10 +302,10 @@ class MY_Util extends CI_Controller {
 		$mail->Host = "smtp.gmail.com";
 		$mail->SMTPAuth	= true;
 		$mail->Port = 465;
-		$mail->Username = "prueba.p5256@gmail.com";
-		$mail->Password = "Parques12345";
+		$mail->Username = "parquesbsas@gmail.com";
+		$mail->Password = "Parquesbsas2019!";
 		$mail->SMTPSecure = "ssl";
-		$mail->SetFrom("parquesboth@both.com");
+		$mail->SetFrom('parquesbsas@gmail.com');
 
 		if(!empty($emailComuna)) {
 			$mail->AddAddress($emailComuna);
@@ -320,17 +315,17 @@ class MY_Util extends CI_Controller {
 			$mail->AddAddress($emailOng);
 		}
 
-		$mail->AddReplyTo("admin@admin.com");
+		$mail->AddReplyTo("parquesbsas@gmail.com");
 		$mail->Subject = "Reclamo Documento";
 		$mail->AddEmbeddedImage($rutaLogoImage, "logo");
 		$mail->Body = $this->load->view("/user/email_documento_template", $data, true);
 		$mail->AddAttachment($documento["tmp_name"], $documento["name"]);
 		$mail->IsHTML(true);
-		
+
 		if(!$mail->send()) {
-			return "Error al enviar el email: ". $mail->ErrorInfo ." | Si el problema persiste contactenos a traves del email parquesbsas.contacto@gmail.com";
+			return "Error al enviar el email: Si el problema persiste contactenos a traves del email parquesbsas@gmail.com";
 		} else {
 			return true;
 		}
-	}	
+	}
 }
