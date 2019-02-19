@@ -10,9 +10,9 @@ class MDL_Parque extends CI_Model {
 	public function obtenerParque($idParque, $nombreParque, $estado = true) {
 
 		if(empty($idParque) && !empty($nombreParque)) {
-			
+
 			$parque = $this->db->query("
-				SELECT p.id_parque, p.nombre, p.descripcion, p.direccion, p.imagen, p.patio_juegos, p.likes, p.hates, c.comuna, b.descripcion, p.longitud, p.latitud, p.url_parque
+				SELECT p.id_parque, p.nombre, p.descripcion, p.direccion, p.imagen, p.patio_juegos, p.likes, p.hates, c.comuna, b.descripcion as  barrio, p.longitud, p.latitud, p.url_parque
 				FROM $this->tabla p
 				LEFT JOIN comunas c ON c.id_comuna = p.id_comuna
 				LEFT JOIN barrios b ON b.id_barrio = p.id_barrio
@@ -21,7 +21,7 @@ class MDL_Parque extends CI_Model {
 
 		} else if(!empty($idParque)) {
 
-			$sql = "SELECT p.id_parque, p.nombre, p.descripcion, p.direccion, p.imagen, p.patio_juegos, p.likes, p.hates, p.id_wifi, c.comuna, c.id_comuna, b.descripcion, b.id_barrio, p.longitud, p.latitud, p.url_parque, p.activo
+			$sql = "SELECT p.id_parque, p.nombre, p.descripcion, p.direccion, p.imagen, p.patio_juegos, p.likes, p.hates, p.id_wifi, c.comuna, c.id_comuna, b.descripcion as barrio, b.id_barrio, p.longitud, p.latitud, p.url_parque, p.activo
 				FROM $this->tabla p
 				LEFT JOIN comunas c ON c.id_comuna = p.id_comuna
 				LEFT JOIN barrios b ON b.id_barrio = p.id_barrio
@@ -44,7 +44,7 @@ class MDL_Parque extends CI_Model {
 	public function obtenerParquesActivo() {
 		$this->db->select("count(*) as number");
 		$this->db->where("activo", "1");
-		$this->db->where("nombre !=", "");  
+		$this->db->where("nombre !=", "");
 		$result = intval($this->db->get("parques")->row()->number);
 		return $result;
 	}
@@ -54,15 +54,15 @@ class MDL_Parque extends CI_Model {
 		if($estado == true) {
 			$this->db->where("activo", "1");
 		}
-		$this->db->where("nombre !=", "");  
+		$this->db->where("nombre !=", "");
 		$parques = $this->db->get("parques")->result();
 		return $parques;
-	}	
+	}
 
 	public function obtenerPaginado($por_pagina, $segmento) {
 		$this->db->select("*");
 		$this->db->where("activo", "1");
-		$this->db->where("nombre !=", ""); 
+		$this->db->where("nombre !=", "");
 		$parques = $this->db->get('parques', $por_pagina,$segmento);
 
 		if($parques->num_rows() > 0) {
@@ -74,7 +74,7 @@ class MDL_Parque extends CI_Model {
 
 		return null;
 	}
-	
+
 	public function votar($columna) {
 
 		if(empty($columna)) {
@@ -82,11 +82,11 @@ class MDL_Parque extends CI_Model {
 		}
 
 		if(isset($_COOKIE["votado_". $this->idParque])) {
-		
+
 			return date("Y-m-d h:i:s", $_COOKIE["tiempo_expiracion_voto"]);;
-		
+
 		} else {
-			
+
 			$sql = "SELECT {$columna} as total FROM $this->tabla WHERE id_parque = ? LIMIT 1";
 			$resultQuery = $this->db->query($sql, array($this->idParque));
 
@@ -95,7 +95,7 @@ class MDL_Parque extends CI_Model {
 			}
 
 			$totalVotos = $resultQuery->row();
-			
+
 			if($totalVotos === null) { // tiene que dar 0
 				return false;
 			}
@@ -105,7 +105,7 @@ class MDL_Parque extends CI_Model {
 			$totalVotos += 1;
 			$sql = "UPDATE $this->tabla SET {$columna} = ". $totalVotos ." WHERE id_parque = ?";
 			$resultQuery = $this->db->query($sql, array($this->idParque));
-			
+
 			if($resultQuery == true) {
 				setcookie("votado_". $this->idParque, 1, time()+50);
 				setcookie("tiempo_expiracion_voto", time()+50, time()+50);
@@ -131,7 +131,7 @@ class MDL_Parque extends CI_Model {
 	public function buscarParquePorBarrio($barrio) {
 		if(!empty($barrio)) {
 			$result = $this->db->query("SELECT id_parque, id_comuna, id_barrio, nombre, url_parque FROM $this->tabla p WHERE id_barrio = ". $this->db->escape($barrio)." AND activo = 1")->result();
-			return !empty($result) ? $result : null;	
+			return !empty($result) ? $result : null;
 		}
 		return false;
 	}

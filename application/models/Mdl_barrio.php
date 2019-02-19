@@ -9,14 +9,14 @@ class MDL_Barrio extends CI_Model {
 		$resultQuery = $this->db->query("SELECT * FROM $this->tabla")->result();
 		return $resultQuery;
 	}
-	
+
 	public function buscarBarrioPorNombre($nombreBarrio) {
 
 		if(!empty($nombreBarrio)) {
-			$result = $this->db->query("SELECT * FROM $this->tabla WHERE barrio LIKE '%". $this->db->escape_like_str($nombreBarrio) ."%' ESCAPE '!'")->row();
+			$result = $this->db->query("SELECT * FROM $this->tabla WHERE descripcion LIKE '%". $this->db->escape_like_str($nombreBarrio) ."%' ESCAPE '!'")->row();
 			return !empty($result) ? $result : null;
 		}
-		
+
 		return false;
 	}
 
