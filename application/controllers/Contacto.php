@@ -61,7 +61,7 @@ class Contacto extends CI_Controller {
 
 				} else {
 					$result = $this->enviarMailContacto($nombreContactoPost, $emailContactoPost, $comentarioContactoPost, $asuntoContactoPost);
-					
+
 					if($result === true) {
 						$data = array(
 							"res" =>  "enviado",
@@ -77,12 +77,12 @@ class Contacto extends CI_Controller {
 				}
 			}
 
-			echo json_encode($data);	
+			echo json_encode($data);
 
 		} else {
 			show_404();
 		}
-	}	
+	}
 
 	protected function enviarMailContacto($nombreContactoPost, $emailContactoPost, $comentarioContactoPost, $asuntoContactoPost) {
 		$data = array();
@@ -90,26 +90,26 @@ class Contacto extends CI_Controller {
 		$data["email"] = $emailContactoPost;
 		$data["comentario"] = $comentarioContactoPost;
 		$data["asunto"] = $asuntoContactoPost;
-		$rutaLogoImage = dirname(dirname(__DIR__)). "/public/img/logo.png";		
+		$rutaLogoImage = dirname(dirname(__DIR__)). "/public/img/logo.png";
 		$mail = new PHPMailer();
 		$mail->IsSMTP();
 		$mail->Host = "smtp.gmail.com";
 		$mail->SMTPAuth	= true;
 		$mail->Port = 465;
-		$mail->Username = "prueba.p5256@gmail.com";
-		$mail->Password = "Parques12345";
+		$mail->Username = "parquesbsas@gmail.com";
+		$mail->Password = "Parquesbsas2019!";
 		$mail->SMTPSecure = "ssl";
 		$mail->SetFrom($emailContactoPost, $nombreContactoPost);
-		$destino = "victor.1995.18@gmail.com";
+		$destino = "parquesbsas@gmail.com";
 		$mail->AddAddress($destino);
 		$mail->AddReplyTo($emailContactoPost);
 		$mail->Subject = "Contacto | ". $asuntoContactoPost;
 		$mail->AddEmbeddedImage($rutaLogoImage, "logo");
-		$mail->Body = $this->load->view("/guest/contacto_template", $data, true);		
+		$mail->Body = $this->load->view("/guest/contacto_template", $data, true);
 		$mail->IsHTML(true);
 
 		if(!$mail->send()) {
-			return "Error al enviar el email: ". $mail->ErrorInfo ." | Si el problema persiste contactenos a traves del email parquesbsas.contacto@gmail.com";
+			return "Error al enviar el email: Si el problema persiste contactenos a traves del email parquesbsas@gmail.com";
 		}  else {
 			return true;
 		}
