@@ -141,10 +141,7 @@ class Reclamo extends MY_Util {
 		$data['logo']= 'logo.png';
 		$this->load->view("/guest/nav",$data);
 
-		$searchString = '.docx';
 		$files = glob('public/documents/*.docx');
-
-		var_dump($files);die;
 
 	    // array populated with files found
 	    // containing the search string.
@@ -174,7 +171,7 @@ class Reclamo extends MY_Util {
 
 		$this->load->helper("download");
 
-		$rutaArchivo = glob('../parquesbsas/public/documents/'. $nombreDocumento);
+		$rutaArchivo = glob('public/documents/'. $nombreDocumento);
 
 		if(empty($rutaArchivo) || empty($rutaArchivo[0])) {
 			redirect(base_url());
