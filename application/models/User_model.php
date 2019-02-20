@@ -160,8 +160,25 @@ class User_model extends CI_Model {
 		}
 	}
 
-	public function recoverPassword($email){
-		return array('status' => 200,'message' => 'Contraseña recuperada', 'response' => 'Se ha enviado un mail a tu correo para restablecer tu contraseña.');
+	public function insertarToken($email) {
+		$usuario = $this->db->query("SELECT id_usuario, nombre, email FROM usuarios WHERE email = '$email' AND activo = 1 OR activo = 2 LIMIT 1")->row(); // valido que el usuario este activo.(inactivo 0)
+	
+		if(empty($usuario)) {
+			return array('status' => 204,'message' => 'Usuario inexistente');
+		}
+
+		$cadena = $usuario->nombre.$usuario->email.rand(1,9999999).date("Y-m-d"); // genero el token
+		$token = sha1($cadena); // genero el token
+
+		$resultQuery = $this->db->query("UPDATE usuarios SET token = '$token' WHERE email = '$email' LIMIT 1");  // seteo el token al usuario
+
+		if($resultQuery == true) {
+			return array('status' => 200,'message' => 'Contraseña recuperada', 'response' => 'Se ha enviado un mail a tu correo para restablecer tu contraseña.');
+		}
+	}
+
+	public function getUsuario($email) {
+		return $this->db->query("SELECT * FROM usuarios WHERE email = '$email'")->row();
 	}
 
 	public function loginWithGoogle($user) {
