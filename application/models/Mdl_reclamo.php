@@ -133,11 +133,7 @@ class MDL_Reclamo extends CI_Model {
 		date_default_timezone_set('America/Argentina/Buenos_Aires');
 		$hoy = date("Y-m-d H:i:s");
 		$inicio = date("Y-m");
-	//	$hoy = "2019-02-26 00:26:11";
-	//	$inicio = "2019-02";
 
-		/*SELECT count(id_reclamo) cantidad , id_reclamo , id_parque FROM usuarios_reclamos_parques Where `fecha_creacion` <= "2018-09-03 06:26:11" and `fecha_creacion` > '2018-09' group by id_parque, id_reclamo
-		*/
 		$resultQuery = $this->db->query("SELECT count(id_reclamo) cantidad , id_reclamo , id_parque FROM $this->tablaUsuarioReclamoParque WHERE id_estado = 1 AND fecha_creacion <= '$hoy' AND fecha_creacion > '$inicio' GROUP BY id_parque, id_reclamo;")->result();
 
 		if(empty($resultQuery)) {
@@ -148,15 +144,6 @@ class MDL_Reclamo extends CI_Model {
 
 		$reclamoMayor = array_search(max($resultQuery), $resultQuery);
 		$reclamo = $resultQuery[$reclamoMayor];
-
-		echo "<pre>";
-		print_r($reclamoMayor);
-
-		echo "<pre>";
-		print_r($reclamo);
-
-		echo "<pre>";
-		print_r($resultQuery);die;
 
 		if($reclamo->cantidad < 0) {
 			$this->expirarReclamos();
