@@ -144,6 +144,8 @@ class Reclamo extends MY_Util {
 		$searchString = '.docx';
 		$files = glob('../parquesbsas/public/documents/*.docx');
 
+		var_dump($files);die;
+
 	    // array populated with files found
 	    // containing the search string.
 	    $filesFound = array();
