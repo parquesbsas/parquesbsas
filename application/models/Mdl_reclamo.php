@@ -28,7 +28,7 @@ class MDL_Reclamo extends CI_Model {
 			}
 
 		} elseif(is_string($saveImage)) {
-			
+
 			$message = filter_var($saveImage, FILTER_SANITIZE_STRING);
 			return htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
 		}
@@ -37,7 +37,7 @@ class MDL_Reclamo extends CI_Model {
 	}
 
 	protected function guardarImagen() {
-		
+
 		$config["upload_path"] = "./public/img/reclamo";
 		$config["allowed_types"] = "jpg|JPEG|jpeg";
 		$config["max_size"] = "2048";
@@ -54,7 +54,7 @@ class MDL_Reclamo extends CI_Model {
  			return $this->upload->data();
 		}
 		return false;
-	}		
+	}
 
 	public function obtenerListadoReclamos() {
 		$resultQuery = $this->db->query("SELECT * FROM $this->tabla p");
@@ -81,7 +81,7 @@ class MDL_Reclamo extends CI_Model {
 	}
 
 	public function actualizarEstadoReclamos($nombreDocumento) {
-		
+
 		if(empty($nombreDocumento)) {
 			return false;
 		}
@@ -98,7 +98,7 @@ class MDL_Reclamo extends CI_Model {
   		//$reclamoStingLimpio = preg_replace("/[^A-Za-z0-9 ]/", "", $datos[0]); // Removes special chars.
   		//$reclamoPartesString = explode(" ", $reclamoStingLimpio); // cortar el string en distintas partes
   		$fechaPartesString = explode("_", $datos[2]); // cortar el string en distintas partes
-		
+
 		$parqueNombre = $datos[1];
 		$reclamo = $datos[0];
 		$mes = $fechaPartesString[0];
@@ -131,11 +131,11 @@ class MDL_Reclamo extends CI_Model {
 	public function obtenerReclamoPlanilla() {
 
 		date_default_timezone_set('America/Argentina/Buenos_Aires');
-		//$hoy = date("Y-m-d H:i:s");
-		//$inicio = date("Y-m");
-		$hoy = "2019-02-26 00:26:11";
-		$inicio = "2019-02";
-		
+		$hoy = date("Y-m-d H:i:s");
+		$inicio = date("Y-m");
+	//	$hoy = "2019-02-26 00:26:11";
+	//	$inicio = "2019-02";
+
 		/*SELECT count(id_reclamo) cantidad , id_reclamo , id_parque FROM usuarios_reclamos_parques Where `fecha_creacion` <= "2018-09-03 06:26:11" and `fecha_creacion` > '2018-09' group by id_parque, id_reclamo
 		*/
 		$resultQuery = $this->db->query("SELECT count(id_reclamo) cantidad , id_reclamo , id_parque FROM $this->tablaUsuarioReclamoParque WHERE id_estado = 1 AND fecha_creacion <= '$hoy' AND fecha_creacion > '$inicio' GROUP BY id_parque, id_reclamo;")->result();
@@ -148,7 +148,7 @@ class MDL_Reclamo extends CI_Model {
 		$reclamoMayor = array_search(max($resultQuery), $resultQuery);
 		$reclamo = $resultQuery[$reclamoMayor];
 
-		if($reclamo->cantidad < 30) {
+		if($reclamo->cantidad < 0) {
 			$this->expirarReclamos();
 			return null;
 		}
@@ -158,7 +158,7 @@ class MDL_Reclamo extends CI_Model {
 		$reclamo->usuarios = $this->obtenerUsuariosPlanilla($reclamo->id_reclamo, $reclamo->id_parque);
 
 		$this->expirarReclamos($reclamo->usuarios);
-		
+
 		return !empty($reclamo) ? $reclamo : null;
 	}
 
@@ -166,10 +166,10 @@ class MDL_Reclamo extends CI_Model {
 
 		$resultQuery = $this->db->query("
 			SELECT urp.id_usuario_reclamo_parque, u.id_usuario, u.nombre, u.apellido, tp.descripcion as tipo_documento, u.numero_documento, u.email, urp.comentarios, urp.imagen
-			FROM usuarios_reclamos_parques urp 
-			LEFT JOIN usuarios u ON urp.id_usuario = u.id_usuario 
+			FROM usuarios_reclamos_parques urp
+			LEFT JOIN usuarios u ON urp.id_usuario = u.id_usuario
 			LEFT JOIN tipos_documento tp ON tp.id_tipo_documento = u.id_tipo_documento
-			WHERE id_reclamo = $idReclamo and id_parque = $idParque 
+			WHERE id_reclamo = $idReclamo and id_parque = $idParque
 			GROUP BY urp.id_usuario;
 		")->result();
 
@@ -180,8 +180,8 @@ class MDL_Reclamo extends CI_Model {
 
 		$resultQuery = $this->db->query("
 			SELECT id_parque, nombre, url_parque, direccion
-			FROM $this->tablaParque 
-			WHERE id_parque = $idParque 
+			FROM $this->tablaParque
+			WHERE id_parque = $idParque
 		")->row();
 
 		return !empty($resultQuery) ? $resultQuery : null;
@@ -191,8 +191,8 @@ class MDL_Reclamo extends CI_Model {
 
 		$resultQuery = $this->db->query("
 			SELECT id_reclamo, descripcion
-			FROM $this->tabla 
-			WHERE id_reclamo = $idReclamo 
+			FROM $this->tabla
+			WHERE id_reclamo = $idReclamo
 		")->row();
 
 		return !empty($resultQuery) ? $resultQuery : null;
@@ -211,7 +211,7 @@ class MDL_Reclamo extends CI_Model {
 					$ids = $dataReclamo->id_usuario_reclamo_parque;
 				} else {
 					$ids .= ",". $dataReclamo->id_usuario_reclamo_parque;
-				}			
+				}
 			}
 
 			if(empty($ids)) {
@@ -243,7 +243,7 @@ class MDL_Reclamo extends CI_Model {
 		}
 
 		if(!empty($nombreImagen)) {
-			
+
 			$imagen = dirname(APPPATH) ."/public/img/reclamo/". $nombreImagen;
 
 			if(file_exists($imagen)) {
@@ -252,13 +252,13 @@ class MDL_Reclamo extends CI_Model {
 			}
 		}
 
-		return $resultQuery;	
+		return $resultQuery;
 	}
 
 	public function mostrarReclamo($idReclamo) {
 
 		if(!empty($idReclamo)) {
-			
+
 			$resultQuery = $this->db->query("
 				SELECT urp.id_usuario_reclamo_parque, r.descripcion as reclamo_decripcion, p.nombre as parque_nombre , re.descripcion, urp.comentarios, urp.fecha_creacion, urp.imagen, urp.latitud, urp.longitud
 				FROM $this->tablaUsuarioReclamoParque urp
@@ -272,7 +272,7 @@ class MDL_Reclamo extends CI_Model {
 		}
 
 		return $resultQuery = null;
-	}	
+	}
 
 }
 

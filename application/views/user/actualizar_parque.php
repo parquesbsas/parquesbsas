@@ -6,7 +6,7 @@
 				<h2 class="text-left">Crear Parque</h2>
 			</div>
 		</div>
-		
+
 		<hr>
 		<br>
 
@@ -163,28 +163,6 @@
 					<p id="error_form_registro" class="errorform_registro text-danger" style="font-weight: bold;"></p>
 
 					<br>
-
-					<div class="form-group">
-						<div class="col-sm-2">
-							<label class="control-label" style="color: #000000;">Cargar Excel : &nbsp;&nbsp;&nbsp;
-								<span style="font-size:85%;" class="label label-warning">Requerido</span>
-							</label>
-						</div>					
-						<div class="col-sm-8">
-							<input accept=".csv" type="file" name="fileExcel" id="fileExcel" class="form-control">
-							<p class="error_fileExcel text-danger"></p>
-						</div>
-					</div>
-					<hr>
-					<br>
-					<div class="form-group">
-						<label  class="control-label col-xs-4"></label><!-- borre en label for="nombre" -->
-						<div class="col-sm-offset-2 col-sm-10">
-							<button id="actualizar_parque" type='submit' class="btn btn-default" onclick="cargando_actualizar_parques()">Cargar Excel</button>
-						</div>
-					</div>
-					<p id="cargar_form_cargar_parque_excel" style="font-weight: bold;"><font color="green">Cargando....</font></p>
-					<p id="error_form_cargar_parque_excel" class="errorform_enviar_reclamo_documento_email text-danger" style="font-weight: bold;"></p>
 				</form>
 			</div>
 		</div>
