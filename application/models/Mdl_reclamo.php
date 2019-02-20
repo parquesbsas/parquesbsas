@@ -157,7 +157,7 @@ class MDL_Reclamo extends CI_Model {
 		$reclamo->reclamo = $this->obtenerDetalleReclamoPlanilla($reclamo->id_reclamo);
 		$reclamo->usuarios = $this->obtenerUsuariosPlanilla($reclamo->id_reclamo, $reclamo->id_parque);
 
-		$this->expirarReclamos($reclamo->usuarios);
+	//	$this->expirarReclamos($reclamo->usuarios);
 
 		return !empty($reclamo) ? $reclamo : null;
 	}

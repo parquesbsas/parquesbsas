@@ -48,9 +48,10 @@ class Word extends CI_Controller {
 		}
 
 		// --- Guardamos el documento
-		$templateWord->saveAs("public/documents/". $nombreDocumento .".docx");
-		header("Content-Disposition: attachment; filename=". $nombreDocumento. ".docx; charset=iso-8859-1");
-		echo file_get_contents("public/documents/". $nombreDocumento .".docx");
+	//	$templateWord->saveAs("public/documents/". $nombreDocumento .".docx");
+		var_dump($templateWord->saveAs("public/documents/". $nombreDocumento .".docx"));die;
+	//	header("Content-Disposition: attachment; filename=". $nombreDocumento. ".docx; charset=iso-8859-1");
+	//	echo file_get_contents("public/documents/". $nombreDocumento .".docx");
 	}
 }
 ?>
