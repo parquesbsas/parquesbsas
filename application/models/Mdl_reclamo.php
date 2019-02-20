@@ -148,9 +148,16 @@ class MDL_Reclamo extends CI_Model {
 
 		$reclamoMayor = array_search(max($resultQuery), $resultQuery);
 		$reclamo = $resultQuery[$reclamoMayor];
-		var_dump($reclamoMayor);
-		var_dump($reclamo);
-		var_dump($resultQuery);die;
+
+		echo "<pre>";
+		print_r($reclamoMayor);
+
+		echo "<pre>";
+		print_r($reclamo);
+
+		echo "<pre>";
+		print_r($resultQuery);die;
+
 		if($reclamo->cantidad < 0) {
 			$this->expirarReclamos();
 			return null;
