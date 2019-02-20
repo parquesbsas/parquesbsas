@@ -142,7 +142,7 @@ class Reclamo extends MY_Util {
 		$this->load->view("/guest/nav",$data);
 
 		$searchString = '.docx';
-		$files = glob('../parquesbsas/public/documents/*.docx');
+		$files = glob('../parquesbsas/public/documents/');
 
 		var_dump($files);die;
 
