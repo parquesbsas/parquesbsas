@@ -16,23 +16,20 @@ class MDL_Encuesta extends CI_Model {
 	public function realizarEncuestaParque() {
 
 		if(empty($this->idParque) || empty($this->idUsuario) || empty($this->idTipoEncuesta) || empty($this->calificacion)) {
-			var_dump($this);die;
 			return null;
 		}
 
 		$respuestaValidar = $this->validarTiempoEncuesta();
 
-		var_dump($respuestaValidar);die;
-
 		if(is_null($respuestaValidar)) {
 			return "Usted ya ha realizado esta encuesta en este parque, debera esperar el siguiente mes para volver a realizar la encuesta.";
 
-		} elseif ($respuestaValidar === false) {
+		} elseif($respuestaValidar === false) {
 			return false;
 		}
 
 		$sql = "INSERT INTO $this->tablaEncuestaUsuarioParque (id_usuario, id_encuesta, id_calificacion, id_parque, fecha_creacion)
-				VALUES ( ". $this->db->escape_str($this->idUsuario) .", ". $this->db->escape_str($this->idTipoEncuesta) .", ". $this->db->escape($this->calificacion) .", ". $this->db->escape_str($this->idParque) .",  ". $this->db->escape($this->fechaCreacion) .");";
+				VALUES ( ". $this->db->escape_str($this->idUsuario) .", ". $this->db->escape_str($this->idTipoEncuesta) .", ". $this->db->escape_str($this->calificacion) .", ". $this->db->escape_str($this->idParque) .",  ". $this->db->escape($this->fechaCreacion) .");";
 
 		if($this->db->query($sql)) {
 			return true;
