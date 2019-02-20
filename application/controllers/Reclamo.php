@@ -159,6 +159,8 @@ class Reclamo extends MY_Util {
 			$filesFound[] = $archivoData;
 	    }
 
+	    var_dump($filesFound);die;
+
 		$data = array("documentos" => $filesFound);
 		$this->load->view("/user/reclamos_documento", $data);
 		$this->load->view("/guest/footer");
