@@ -1,6 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8">
 <title>Recuperar Contraseña</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
@@ -26,7 +27,7 @@
 								</tr>
 								<tr>
 									<td style="padding: 20px 0 30px 0; color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;">
-										A olvidado su contraseña no hay problema, ingrese al siguiente link para cambiarlo	:
+										Si usted ha olvidado su contraseña, ingrese al siguiente link para cambiarlo:
 										<br><br><br>
 										<div style="text-align: center;font-size:20px;">
 										<span><a href="<?=base_url().'recuperar_contrasena/formulario/'.$usuario->email.'/'.$usuario->token;?>" style="color: #ffffff;"><font color="black">Cambiar Contraseña</font></a></span>
