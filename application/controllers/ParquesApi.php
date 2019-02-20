@@ -1,7 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+include_once(APPPATH.'/core/My_util.php');
 
-class ParquesApi extends CI_Controller {
+class ParquesApi extends My_util {
 
 	/*public function __construct() {
 		   parent::__construct();
@@ -159,8 +160,7 @@ class ParquesApi extends CI_Controller {
 
 			$this->load->model('User_model');
 			$response = $this->User_model->insertarToken($email);
-			$this->load->core('My_util');
-			$this->My_util->enviarEmailRecuperarContraseña($this->User_model->getUsuario($email));
+			$this->enviarEmailRecuperarContraseña($this->User_model->getUsuario($email));
 
 			json_output($response);
 		}
