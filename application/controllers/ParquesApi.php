@@ -159,7 +159,7 @@ class ParquesApi extends CI_Controller {
 
 			$this->load->model('User_model');
 			$response = $this->User_model->insertarToken($email);
-			$this->load->model('My_util');
+			$this->load->core('My_util');
 			$this->My_util->enviarEmailRecuperarContraseña($this->User_model->getUsuario($email));
 
 			json_output($response);
