@@ -13,7 +13,7 @@ class Perfil extends MY_Util {
 	public function index() {
 
 		if($this->session->userdata("login") !== true || empty($this->session->userdata("id"))) {
-			return header("Location: ". base_url());
+			return redirect(base_url()."Error404");
 		}
 
 		$data["info"]= "";
@@ -26,7 +26,7 @@ class Perfil extends MY_Util {
 		$usuario = $this->mdl_usuario->mostrarPerfil($id);
 
 		if(empty($usuario)) {
-			redirect(base_url()."Error404");
+			return redirect(base_url()."Error404");
 		}
 
 		$dniOpciones = $this->ordenarDniOpciones($usuario);
@@ -147,14 +147,14 @@ class Perfil extends MY_Util {
 			echo json_encode($data);
 
 		} else {
-			show_404();
+			return redirect(base_url()."Error404");
 		}
 	}
 
 	public function eliminar() {
 
 		if($this->session->userdata("login") !== true || empty($this->session->userdata("id"))) {
-			return redirect(base_url());
+			return redirect(base_url()."Error404");
 		}
 
 		$usuarioId = $this->session->userdata("id");

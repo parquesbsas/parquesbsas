@@ -75,7 +75,7 @@ class Sesion extends MY_Util {
 			echo json_encode($data);
 
 		} else {
-			show_404();
+			return redirect(base_url()."Error404");
 		}
 	}
 

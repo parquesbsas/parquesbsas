@@ -6,12 +6,12 @@ class Administrador extends CI_Controller {
 	public function __construct() {
 		parent::__construct();
 		$this->load->model("mdl_usuario");
-	}	
+	}
 
 	public function index()	{
-		
+
 		if($this->session->perfil !== "2") {
-			return redirect(base_url());
+			return redirect(base_url()."Error404");
 		}
 
 		//var_dump($this->mdl_parque);die;
@@ -26,7 +26,7 @@ class Administrador extends CI_Controller {
 	}
 
 	public function actualizarAdministrador($idUsuario, $idTipoUsuario) {
-		
+
 		if(empty($idUsuario) || empty($idTipoUsuario) || $this->session->perfil !== "2") {
 			return redirect(base_url()."Error404");
 		}

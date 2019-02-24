@@ -63,7 +63,7 @@ class Reenviar_email extends MY_Util {
 
 			echo json_encode($dataResponse);
 		} else {
-			show_404();
+			return redirect(base_url()."Error404");
 		}
 	}
 

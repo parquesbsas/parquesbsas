@@ -99,7 +99,7 @@ class Registro extends MY_Util {
 
 			echo(json_encode($dataResponse));
 		} else {
-			show_404();
+			return redirect(base_url()."Error404");
 		}
 	}
 
@@ -135,7 +135,7 @@ class Registro extends MY_Util {
 	public function activar($email = null, $token = null) {
 
 		if(empty($email) || empty($token)) {
-			redirect(base_url()."Error404");
+			return redirect(base_url()."Error404");
 		}
 
 		$this->mdl_usuario->token = trim($token);
@@ -154,10 +154,10 @@ class Registro extends MY_Util {
 
 		} elseif(is_null($usuario)) {
 			// no existe el usuario
-			redirect(base_url()."Error404");
+			return redirect(base_url()."Error404");
 		} else {
 			// Fallo el insert al actualizar
-			redirect(base_url()."Error404");
+			return redirect(base_url()."Error404");
 		}
 	}
 }

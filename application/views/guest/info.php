@@ -62,7 +62,7 @@
 							</div>
 							<br><br><br>
 							<div class="col-md-6">
-								<img style="width:890px; height:500.63px;" src="<?echo $imagen = empty($parque->imagen) ? base_url('public/img/parques/54AC9F290.jpg') : base_url('public/img/parques').'/'.$parque->imagen;?>" class="img-responsive img-rounded">
+								<img style="width:890px; height:500.63px;" src="<?echo $imagen = empty($parque->imagen) ? base_url('public/img/parques/default.jpg') : base_url('public/img/parques').'/'.$parque->imagen;?>" class="img-responsive img-rounded">
 							</div>
 						</div>
 					</div>

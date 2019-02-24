@@ -18,13 +18,13 @@ class Busqueda extends MY_Util {
 		$nombreParque = !empty($this->input->post("buscar_parque")) ? $this->input->post("buscar_parque") : $nombreParque;
 
 		if(empty($nombreParque) && empty($idParque)) {
-			redirect(base_url()."Error404");
+			return redirect(base_url()."error/value/400");
 		}
 
 		$parque = $this->mdl_parque->obtenerParque($idParque, $nombreParque);
 
 		if(empty($parque)) {
-			redirect(base_url()."Error404");
+			return redirect(base_url()."error/value/400");
 		}
 
 		if(is_array($parque)) {
@@ -122,7 +122,7 @@ class Busqueda extends MY_Util {
 			}
 			echo json_encode($data);
 
-		} else show_404();
+		} else return redirect(base_url()."Error404");
 	}
 
 	public function busquedaPorComuna() {
@@ -168,13 +168,13 @@ class Busqueda extends MY_Util {
 			}
 			echo json_encode($data);
 
-		} else show_404();
+		} else return redirect(base_url()."Error404");
 	}
 
 	public function resultadoParques($parques = null) {
 
 		if(empty($parques)) {
-			redirect(base_url()."Error404");
+			return redirect(base_url()."Error404");
 		}
 
 		$data["info"]= "";
