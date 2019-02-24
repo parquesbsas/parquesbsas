@@ -1,14 +1,8 @@
-<?
-//var_dump($documentos);die;
-?>
-
-
 <div class="section section-info">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
 				<h2 class="text-left" "><b>Listado de reclamos</b></h2>
-				<p style="font-size: 18px ">Tambien podes buscar tus reclamos a traves de los siguientes filtros.</p>
 				<hr>
 				<?php if(!empty($documentos)) {
 					foreach($documentos as $key => $documento) { ?>
