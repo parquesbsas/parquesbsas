@@ -133,7 +133,7 @@ class Parques extends CI_Controller {
 			$this->load->model("mdl_barrio");
 			$data["barrios"] = $this->mdl_barrio->obtenerBarrios();
 			$data["comunas"] = $this->mdl_comuna->obtenerComunas();
-			$this->load->view("/user/actualizar_parque",$data);
+			$this->load->view("/user/crear_parque",$data);
 			$this->load->view("/guest/footer");
 		}
 	}

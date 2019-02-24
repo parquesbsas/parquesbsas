@@ -6,7 +6,7 @@ class Actividad extends CI_Controller {
 	public function crear() {
 
 		if($this->input->is_ajax_request()) {
-	
+
 			if($this->session->perfil !== "2") {
 				$data = array(
 					"res" => "error_perfil",
@@ -28,10 +28,10 @@ class Actividad extends CI_Controller {
 					$this->mdl_actividad->nombre = $this->input->post("actividadNombre");
 					$this->mdl_actividad->descripcion = $this->input->post("actividadDescripcion");
 
-	 				$result = $this->mdl_actividad->crear();					
+					$result = $this->mdl_actividad->crear();
 
 					if(!empty($result)) {
-						$data = array (
+						$data = array(
 							"res" => "parque_actualizado",
 							"message" => "Se creo la actividad correctamente."
 						);
@@ -45,8 +45,11 @@ class Actividad extends CI_Controller {
 				}
 			}
 
-			echo json_encode($data);	
+			echo json_encode($data);
 
+		} else {
+			return redirect(base_url()."Error404");
 		}
-	}	
+	}
 }
+?>
