@@ -3,7 +3,9 @@
 		<div class="row">
 			<div class="col-md-12" id="admin_listado_parques">
 				<h2 class="text-left" "><b>Registros de parques</b></h2>
-				<p style="font-size: 18px ">En el siguiente listado de usuarios podras actualizar su perfil.</p>
+				<p style="text-align: left;">
+					<a type="button" class="btn btn-success btn-rounded" href="<?echo base_url()."parques/crear"?>">Agregar Nuevo Parque</a>
+				</p>
 				<hr>
 				<input class="form-control" type="text" id="myInput" onkeyup="buscarNombre()" placeholder="Buscar parque..." title="Buscar parque">
 				<br/>
@@ -46,5 +48,5 @@ function buscarNombre() {
 			}
 		}
 	}
-}	
+}
 </script>

@@ -4,50 +4,50 @@
 	if(!file_exists($rutaImagen)) {
 		$imagen = "default.jpg";
 	}
+
+	$label = "danger";
+
+	if($reclamo->descripcion == "En proceso") {
+		$label = "warning";
+	}elseif($reclamo->descripcion == "Procesado") {
+		$label = "success";
+	}
 ?>
 <div class="section section-info">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h2 class="text-left" style="text-decoration: underline; ">Detalle del Reclamo</h2>
-				</br></br>
-				<div class="row">
-					<div class="col-sm-7">
-						<dl>
-							<dt>Reclamo: <?php echo($reclamo->reclamo_decripcion)?></dt>
-							<dt>Parque : <?php echo($reclamo->parque_nombre)?></dt>
-							<dt>Comentarios :</dt>
-							<dd><?php echo($reclamo->comentarios)?></dd>
-							<dt>Fecha y Horario:</dt>
-							<dd><?php echo($reclamo->fecha_creacion)?></dd>
-							<dt>Estado del reclamo :</dt>
-							<?php $label = "danger";
-							if($reclamo->descripcion == "En proceso") {
-								$label = "warning";
-							}elseif($reclamo->descripcion == "Procesado") {
-								$label = "success";
-							}?>
-							<dd><span class="label label-<?echo($label)?>"><?php echo($reclamo->descripcion)?></span></dd>
-						</dl>
-					</div>
-					<div class="col-sm-5" text-align="center">
-						<img src="<?=base_url('public/img/reclamo') ."/". $imagen?>" class="img-responsive img-rounded"/>
-					</div>
-          <a href="https://plus.google.com/share?url=<?php echo base_url()?>&amp;text=Reclamo&nbsp;=&nbsp;<?echo($reclamo->reclamo_decripcion);?>%0DParque&nbsp;=&nbsp;<?echo($reclamo->parque_nombre);?>%0DComentarios&nbsp;=&nbsp;<?echo($reclamo->comentarios);?>%0D%0D<?echo base_url()?>&amp;hl=es" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="https://www.gstatic.com/images/icons/gplus-64.png" alt="Share on Google+"/>
-          </a>
-          <button type="button" class="btn btn-danger" id="modal_delete_reclamo">Eliminar Reclamo</button>
-        </div>
-      </div>
-    </div>
-  </div>
+				<h2 class="text-left"">Detalle del Reclamo</h2>
+				<hr>
 
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="col-sm-6">
+							</br></br>
+							<span><strong>Reclamo:  &nbsp;&nbsp;&nbsp;</strong> <?php echo($reclamo->reclamo_decripcion)?></span>
+							</br></br>
+							<span><strong>Parque:  &nbsp;&nbsp;&nbsp;</strong><?php echo($reclamo->parque_nombre)?></span>
+							</br></br>
+							<span><strong>Comentarios:  &nbsp;&nbsp;&nbsp;</strong><?php echo($reclamo->comentarios)?></span>
+							</br></br>
+							<span><strong>Fecha y Horario:  &nbsp;&nbsp;&nbsp;</strong><?php echo date("d-m-Y H:i", strtotime($reclamo->fecha_creacion))?></span>
+							</br></br>
+							<span><strong>Estado del reclamo :  &nbsp;&nbsp;&nbsp;</strong><span style="font-size: 100%;" class="label label-<?echo($label)?>"><?php echo($reclamo->descripcion)?></span></span>
+							</br></br>
+							<span><strong>Compartir:  &nbsp;&nbsp;&nbsp;</strong><span><a href="https://plus.google.com/share?url=<?php echo base_url()?>&amp;text=Reclamo&nbsp;=&nbsp;<?echo($reclamo->reclamo_decripcion);?>%0DParque&nbsp;=&nbsp;<?echo($reclamo->parque_nombre);?>%0DComentarios&nbsp;=&nbsp;<?echo($reclamo->comentarios);?>%0D%0D<?echo base_url()?>&amp;hl=es" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="https://www.gstatic.com/images/icons/gplus-64.png" alt="Share on Google+"/></a></span>
+							</br></br></br>
+							<span><button type="button" class="btn btn-danger" id="modal_delete_reclamo">Eliminar Reclamo</button></span>
+						</div>
+						<div class="col-sm-6" text-align="center">
+							</br>
+							<img src="<?=base_url('public/img/reclamo') ."/". $imagen?>" class="img-responsive img-rounded"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-<!-- 
-<a href="https://plus.google.com/share?url={adsasd}&amp;text=asdasd = dasdas%0Aasdasda%0asdasd%0dasdas = sddssd&amp;hl=es" onclick="javascript:window.open(this.href,
- '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img
- src="https://www.gstatic.com/images/icons/gplus-64.png" alt="Share on Google+"/></a>
-<li> <a href="" id="modal_delete_user" data-toggle="modal">Eliminar Cuenta</a> </li>
--->
 
 <!-- Eliminar Usuario -->
 <div id="modal_delete_reclamo_show" class="modal fade" aria-hidden="true">
