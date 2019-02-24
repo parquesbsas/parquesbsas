@@ -27,7 +27,7 @@ class Reclamo extends MY_Util {
 			$this->load->view("/guest/footer");
 
 		} else {
-			show_404();
+			return redirect(base_url()."Error404");
 		}
 	}
 
@@ -59,55 +59,64 @@ class Reclamo extends MY_Util {
 				);
 
 			} else {
-				if($this->form_validation->run() === false) { //|| !$this->upload->do_upload("fileImagen")) {
+				if($this->form_validation->run() === false) {
 
-					$data = array (
+					$data = array(
 						"comentario" => form_error("comentario"),
 						"res" => "error"
 					);
 
 				} else {
 
-				//	var_dump("S",$idParquePost, $comentarioPost, $this->input->post());die;
-					$this->mdl_reclamo->idParque = $idParquePost;
-					$this->mdl_reclamo->idUsuario = $idUsuarioPost;
-					$this->mdl_reclamo->idReclamo = $tipoReclamoPost;
-					$this->mdl_reclamo->imagen = $imagenPost;
-					$this->mdl_reclamo->comentario = $comentarioPost;
+					$captchaAnswer = $this->input->post("g-recaptcha-response");
+					$response = $this->recaptcha->verifyResponse($captchaAnswer);
 
-
-		 			$result = $this->mdl_reclamo->guardarReclamo();
-
-					if($result === true) {
+					if($response["success"] == false) {
 						$data = array(
-							"res" => "reclamo_registrado",
-							"message" => "Se registro el reclamo correctamente."
+							"res" => "error_captcha",
+							"message" => "Debe completar el captcha."
 						);
 
-					} elseif(is_null($result)) {
-						$data = array(
-							"res" => "error_campos_vacios",
-							"message" => "Algunos campos se encuentra vacios, si el problema persiste envianos un mail en el formulario de contacto."
-						);
+					} else {
+						$this->mdl_reclamo->idParque = $idParquePost;
+						$this->mdl_reclamo->idUsuario = $idUsuarioPost;
+						$this->mdl_reclamo->idReclamo = $tipoReclamoPost;
+						$this->mdl_reclamo->imagen = $imagenPost;
+						$this->mdl_reclamo->comentario = $comentarioPost;
 
-					} elseif($result == false) {
-						$data = array(
-							"res" => "fallo_db",
-							"message" => "Ocurrio un error al intentar registrar los datos del formulario."
-						);
+						$result = $this->mdl_reclamo->guardarReclamo();
 
-					} elseif(is_string($result)) {
-						$data = array(
-							"res" => "error_reclamo",
-							"message" => $result
-						);
+						if($result === true) {
+							$data = array(
+								"res" => "reclamo_registrado",
+								"message" => "Se registro el reclamo correctamente."
+							);
+
+						} elseif(is_null($result)) {
+							$data = array(
+								"res" => "error_campos_vacios",
+								"message" => "Algunos campos se encuentra vacios, si el problema persiste envianos un mail en el formulario de contacto."
+							);
+
+						} elseif($result == false) {
+							$data = array(
+								"res" => "fallo_db",
+								"message" => "Ocurrio un error al intentar registrar los datos del formulario."
+							);
+
+						} elseif(is_string($result)) {
+							$data = array(
+								"res" => "error_reclamo",
+								"message" => $result
+							);
+						}
 					}
 				}
 			}
 
 			echo json_encode($data);
 
-		} else show_404();
+		} else return redirect(base_url()."Error404");
 	}
 
 	public function detalle($idReclamo = null) {
@@ -126,37 +135,37 @@ class Reclamo extends MY_Util {
 			$this->load->view("/user/info_reclamo", $reclamo);
 			$this->load->view("/guest/footer");
 		} else {
-			redirect(base_url()."Error404");
+			return redirect(base_url()."Error404");
 		}
 	}
 
 	public function documentos() {
 
 		if($this->session->perfil !== "2") {
-			return redirect(base_url());
+			return redirect(base_url()."Error404");
 		}
 
-		$data["info"]= " | Documentos";
-		$this->load->view("/guest/head",$data);
-		$data['logo']= 'logo.png';
-		$this->load->view("/guest/nav",$data);
+		$data["info"] = " | Documentos";
+		$this->load->view("/guest/head", $data);
+		$data["logo"] = "logo.png";
+		$this->load->view("/guest/nav", $data);
 
-		$files = glob('public/documents/*.docx');
+		$files = glob("public/documents/*.docx");
 
-	    // array populated with files found
-	    // containing the search string.
-	    $filesFound = array();
+		// array populated with files found
+		// containing the search string.
+		$filesFound = array();
 
-	    // iterate through the files and determine
-	    // if the filename contains the search string.
-	    foreach($files as $file) {
+		// iterate through the files and determine
+		// if the filename contains the search string.
+		foreach($files as $file) {
 
 			$archivoData = new stdClass();
 			$archivoData->nombre = pathinfo($file, PATHINFO_FILENAME);
 			$archivoData->archivo = pathinfo($file, PATHINFO_BASENAME);
 
 			$filesFound[] = $archivoData;
-	    }
+		}
 
 		$data = array("documentos" => $filesFound);
 		$this->load->view("/user/reclamos_documento", $data);
@@ -171,7 +180,7 @@ class Reclamo extends MY_Util {
 
 		$this->load->helper("download");
 
-		$rutaArchivo = glob('public/documents/'. $nombreDocumento);
+		$rutaArchivo = glob("public/documents/". $nombreDocumento);
 
 		if(empty($rutaArchivo) || empty($rutaArchivo[0])) {
 			redirect(base_url());
@@ -181,18 +190,6 @@ class Reclamo extends MY_Util {
 
 		ob_clean();
 		force_download($nombreDocumento, $file);
-
-		/*
-		header('Content-Type: application/octet-stream');
-		header('Content-Disposition: attachment; filename="' . $nombreArchivo . '"');
-		header('Expires: 0');
-		header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-		header("Content-Transfer-Encoding: binary");
-		header('Pragma: public');
-		header("Content-Length: " . strlen($file));
-
-		exit($file);
-		*/
 	}
 
 	public function enviarEmail() {
@@ -281,7 +278,7 @@ class Reclamo extends MY_Util {
 		} else {
 
 			if($this->session->perfil !== "2") {
-				return redirect(base_url());
+				return redirect(base_url()."Error404");
 			}
 
 			$data["info"]= " | Enviar Documento Reclamo";

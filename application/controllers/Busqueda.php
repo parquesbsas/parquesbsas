@@ -10,6 +10,7 @@ class Busqueda extends MY_Util {
 		$this->load->model("mdl_calificacion");
 		$this->load->model("mdl_comuna");
 		$this->load->model("mdl_barrio");
+		$this->load->library("recaptcha");
 	}
 
 	public function parque($nombreParque = null, $idParque = null) {

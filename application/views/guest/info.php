@@ -32,7 +32,7 @@
 										<br><br><br>
 									<?}?>
 
-									<span><strong>Descripcion: </strong>
+									<span><strong>Descripcion: </strong></span>
 									</br>
 									<?php echo($parque->descripcion)?></span>
 									</br>
@@ -46,6 +46,19 @@
 									</br>
 									<span><strong>Wifi: </strong><?php echo $wifi = empty($parque->id_wifi) ? "No" : "Si"?></span>
 								</div>
+
+								<?php if(!empty($parque->puntos_verdes)) {?>
+								<br>
+								<hr>
+								<br>
+								<h4 class="text-center"><strong>Puntos Verdes</strong></h4>
+								<br>
+								<span><strong>Tipo: </strong><?php echo($parque->puntos_verdes->tipo)?></span>
+								</br>
+								<span><strong>Materiales: </strong><?php echo($parque->puntos_verdes->materiales)?></span>
+								</br>
+								<span><strong>Dias y Horarios: </strong><?php echo($parque->puntos_verdes->dias_horarios)?></span>
+								<?}?>
 							</div>
 							<br><br><br>
 							<div class="col-md-6">
@@ -126,7 +139,7 @@
 			<br><br>
 				<div class="row">
 					<div class="col-md-6">
-						<img src="<?echo base_url('public/img/reclamo.png')?>" class="img-responsive img-rounded 	center-block">
+						<img src="<?echo base_url('public/img/reclamo.png')?>" class="img-responsive img-rounded center-block">
 					</div>
 					<div class="col-md-6">
 						<h3 class="text-center" style="color: #000000;border-bottom: none;">Formulario</h3>
@@ -203,6 +216,12 @@
 								<p class="error_comment text-danger"></p>
 						</div>
 					</div>
+					<hr style="margin-top:5px; margin-bottom :15px; border-top: 1px solid #e5e5e5;"/>
+					<div class="form-group" style="display: flex;justify-content: center;">
+						<div class="g-recaptcha" data-sitekey="6LelW5IUAAAAAMjCTVhkrfzVt-SaLkD6c-Y7tsHR"></div>
+
+					</div>
+
 					<p class="error_reclamo text-danger" style="font-weight: bold;"></p>
 					<p class="reclamoRegistrado" style="color:green; font-weight:bold;"></p>
 					<p id="cargar_reclamo"><font color="green" style="font-weight:bold;">Cargando....</font></p>
@@ -309,7 +328,6 @@
 	idParque = $('#id_parque_estadisticas_encuestas').attr('value');
 	$.post("<?php echo base_url();?>estadisticas/obtenerEstadisticasEncuestaPorParque", {id_parque : idParque}, function(data) {
 		var obj = JSON.parse(data);
-		console.log(obj);
 
 		encuesta = [];
 		total = [];
@@ -346,7 +364,7 @@
 		});
 	});
 </script>
-
+<script src='https://www.google.com/recaptcha/api.js'></script>
 
 <?php } ?>
 
@@ -518,81 +536,3 @@
 		</div>
 	</div>
 </div>
-
-
-
-
-<!-- ventana modal 1 -->
-
-<div id="myModal2" class="modal fade" aria-hidden="true">
-		<div class="modal-dialog">
-				<div class="modal-content">
-						<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-								<h4 class="modal-title" style="color: #000000;">
-	 <img height="30" alt="Brand" src="http://localhost/parquesbeta2.0/public/img/logo.png">
-								asdas <?=$parque->nombre;?></h4>
-		 </div>
-						<div  >
-								<div class="form-group">
-<input class="btn btn-success" id="zzz" data-toggle="modal" type="button" value="Otra Ventana" />
-			</div>
-								</div>
-							 <br>
-									 <div style="color: #000000;"><a href="#password-reset-box" class="reset-window">Olvide mi Contraseña?</a>       |
-				 <a href="<?=base_url()?>registro" class="reset-window">Registrarse?</a></div>
-								<div id="alert-msg"></div>
-										 <div class="modal-footer">
-								<input class="btn btn-default" id="submit" name="submit" type="button" value="Ingresar" />
-								<input class="btn btn-danger" type="button" data-dismiss="modal" value="Cerrar" />
-						</div>
-						</div>
-
-
-				</div>
-		</div>
-<!-- </div>-->
-
-
-
-<!-- ventana modal 2 -->
-
-
-
-<div id="myModal22" class="modal fade" aria-hidden="true">
-		<div class="modal-dialog">
-				<div class="modal-content">
-						<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-								<h4 class="modal-title" style="color: #000000;">
-	 <img height="30" alt="Brand" src="http://localhost/parquesbeta2.0/public/img/logo.png">
-								asdas <?=$parque->nombre;?></h4>
-
-							 </div>
-
-						<div  >
-
-								<div class="form-group">
-
-
-			<div  style="color: #000000; " id="sasa" name="s" ><a >Encuesta</a>
-			</div>
-								</div>
-							 <br>
-									 <div style="color: #000000;"><a href="#password-reset-box" class="reset-window">Olvide mi Contraseña?</a>       |
-				 <a href="<?=base_url()?>registro" class="reset-window">Registrarse?</a></div>
-								<div id="alert-msg"></div>
-						</div>
-						<div class="modal-footer">
-								<input class="btn btn-default" id="submit" name="submit" type="button" value="Ingresar" />
-								<input class="btn btn-danger" type="button" data-dismiss="modal" value="Cerrar" />
-						</div>
-
-				</div>
-		</div>
-</div>
-
-
-
-
-<?// habia 2</div></div> ?>

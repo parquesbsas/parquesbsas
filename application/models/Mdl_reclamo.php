@@ -38,6 +38,7 @@ class MDL_Reclamo extends CI_Model {
 
 	protected function guardarImagen() {
 
+		$config["encrypt_name"] = TRUE;
 		$config["upload_path"] = "./public/img/reclamo";
 		$config["allowed_types"] = "jpg|JPEG|jpeg";
 		$config["max_size"] = "2048";
