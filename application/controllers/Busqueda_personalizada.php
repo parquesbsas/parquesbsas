@@ -40,7 +40,7 @@ class Busqueda_personalizada extends CI_Controller {
 			}
 
 			$parques = $this->mdl_parque->buscarParquePorFiltros($actividadArray, $juego, $feriaComun, $feriaItinerante, $centroSalud);
-			
+
 			if(!empty($parques)) {
 				$data = array(
 					"res" =>  "exito",
@@ -57,7 +57,7 @@ class Busqueda_personalizada extends CI_Controller {
 			echo json_encode($data);
 
 		} else {
-			show_404();
+			return redirect(base_url()."Error404");
 		}
 	}
 

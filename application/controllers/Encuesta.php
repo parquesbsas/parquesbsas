@@ -16,7 +16,7 @@ class Encuesta extends CI_Controller {
 			$this->form_validation->set_rules("tipo_encuesta", "tipo_encuesta", "trim|required|min_length[1]|max_length[15]|xss_clean");
 			$this->form_validation->set_rules("calificacion", "calificacion", "trim|required|min_length[1]|max_length[10]|xss_clean");
 			$this->form_validation->set_rules("id_parque_encuesta", "id_parque_encuesta", "trim|required|min_length[1]|max_length[50]|xss_clean");
-			$this->form_validation->set_rules("id_usuario_encuesta", "id_usuario_encuesta", "trim|required|min_length[1]|max_length[50]|xss_clean");			
+			$this->form_validation->set_rules("id_usuario_encuesta", "id_usuario_encuesta", "trim|required|min_length[1]|max_length[50]|xss_clean");
 			$this->form_validation->set_error_delimiters('<p class="text-danger">', "</p>");
 			$this->form_validation->set_error_delimiters('<p class="text-danger">', "</p>");
 			$this->form_validation->set_message("required", "El campo %s no puede estar vacio.");
@@ -42,7 +42,7 @@ class Encuesta extends CI_Controller {
 				$this->mdl_encuesta->fechaCreacion = date("Y-m-d H:i:s");
 
 	 			$result = $this->mdl_encuesta->realizarEncuestaParque();
-				
+
 				if($result === true) {
 					$data = array(
 						"res" =>  "enviado_encuesta",
@@ -50,26 +50,26 @@ class Encuesta extends CI_Controller {
 					);
 
 				} elseif(is_null($result)) {
-					$data = array( 
+					$data = array(
 						"res" =>  "fallo_db",
 						"message" => "Falta completar campos de la encuesta."
 					);
 				} elseif(is_string($result)) {
-					$data = array( 
+					$data = array(
 						"res" =>  "error_encuesta",
 						"message" => $result
 					);
 				} elseif(empty($result)) {
-					$data = array( 
+					$data = array(
 						"res" =>  "fallo_db",
 						"message" => "Ocurrio un error al intentar registrar los datos de la encuesta, intente mas tarde."
 					);
 				}
 			}
 
-			echo json_encode($data);	
+			echo json_encode($data);
 
-		} else show_404();
-	}	
+		} else return redirect(base_url()."Error404");
+	}
 }
 ?>

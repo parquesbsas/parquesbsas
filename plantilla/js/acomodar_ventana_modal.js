@@ -142,39 +142,3 @@ $(document).ready(function() {
 	});
 	return false;
 });
-
-
-//VENTANA DEL BOTON VENTANA MODAL EN PARQUES , DESPUES ABRIA Q PONERLOS EN LAS ENCUESTAS
-
-
-// EL PRIMERO
-
-$(document).ready(function()
-{
-		$('#sss').click(function(e)
-			 {  
-						document.getElementById("body_mod").style.paddingRight="0px"; 
-						$('#myModal2').modal('show');
-						document.getElementById("body_mod").style.paddingRight="0px"; 
-				});
-				return false;
-});
-
-
-// SEGUNDO
-
-$(document).ready(function()
-{
-		$('#zzz').click(function(e)
-			
-			 // $.post('consulta.php',data,function(respuesta)
-			 {  
-					
-						document.getElementById("body_mod").style.paddingRight="0px"; 
-						$('#myModal22').modal('show');
-					 document.getElementById("body_mod").style.paddingRight="0px"; 
-				 
-				});
-				return false;
-
-});

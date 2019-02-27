@@ -55,6 +55,46 @@ function cargando_crear_actividad_parque() {
 	cargando.css({"display":"block"});
 }
 
+function cargando_actualizar_estacion_salud_parque() {
+	var cargando = $("#cargar_form_admin_actualizar_estacion_salud_parque");
+	cargando.css({"display":"block"});
+}
+
+function cargando_crear_estacion_salud_parque() {
+	var cargando = $("#cargar_crear_estacion_salud_parque");
+	cargando.css({"display":"block"});
+}
+
+function cargando_crear_punto_verde_parque() {
+	var cargando = $("#cargar_crear_punto_verde_parque");
+	cargando.css({"display":"block"});
+}
+
+function cargando_actualizar_punto_verde_parque() {
+	var cargando = $("#cargar_form_admin_actualizar_punto_verde_parque");
+	cargando.css({"display":"block"});
+}
+
+function cargando_crear_feria_comun_parque() {
+	var cargando = $("#cargar_crear_feria_comun_parque");
+	cargando.css({"display":"block"});
+}
+
+function cargando_crear_itinerante_comun_parque() {
+	var cargando = $("#cargar_crear_feria_itinerante_parque");
+	cargando.css({"display":"block"});
+}
+
+function cargando_actualizar_feria_itinerante_parque() {
+	var cargando = $("#cargar_form_admin_actualizar_feria_itinerante_parque");
+	cargando.css({"display":"block"});
+}
+
+function cargando_crear_parque() {
+	var cargando = $("#cargar_crear_parque");
+	cargando.css({"display":"block"});
+}
+
 
 $(document).ready(function() {
 	$('#form-user').on("submit" , function(e) {
@@ -178,11 +218,11 @@ $(document).ready(function() {
 					$("#error_form_registro").append(json.message);
 					setTimeout(function() {
 						window.location.replace(base_url +"Error404");
-					}, 3000);					
+					}, 3000);
 				} else if(json.res == "existe") {
 					$(".errorform_registro").css({"display":"block"});
 					$("#error_form_registro").append(json.message);
-					
+
 				} else if(json.res == "erroremail") {
 					$(".errorform_registro").css({"display":"block"});
 					$("#error_form_registro").append(json.message);
@@ -239,12 +279,12 @@ $(document).ready(function() {
 			success: function(data) {
 
 				json = JSON.parse(data);
-				
+
 				$(".erroremail_resend,.correcto, #form_error_email_reenviar, .erroremail_resend").html("").css({"display":"none"});
 
 				if(json.res == "error") {
 
-					if(json.email_resend) {				
+					if(json.email_resend) {
 
 						$("#icon-email_resend").remove();
 						$("#form_error_email_reenviar").append(json.email_resend).css({"display":"block"});
@@ -259,7 +299,7 @@ $(document).ready(function() {
 
 						$("#icon-email_resend").remove();
 						$(".erroremail_resend").css({"display":"block"});
-						$("#error_email_resend").append(json.message);								
+						$("#error_email_resend").append(json.message);
 					}
 
 				} else if(json.res == "erroremail") {
@@ -268,7 +308,7 @@ $(document).ready(function() {
 
 						$("#icon-email_resend").remove();
 						$(".erroremail_resend").append(json.email_resend).css({"display":"block"});
-						$("#error_email_resend").append(json.message);						
+						$("#error_email_resend").append(json.message);
 
 					}
 
@@ -279,7 +319,7 @@ $(document).ready(function() {
 					$("#error_email_resend").append(json.message);
 					setTimeout(function() {
 						window.location.replace(base_url +"Error404");
-					}, 3000);						
+					}, 3000);
 
 				} else if(json.res == "activado") {
 
@@ -320,7 +360,7 @@ $(document).ready(function() {
 // Actualizar
 $(document).ready(function() {
 	$('#form-update').on("submit", function(e) {
-		
+
 		var cargando = $("#cargar_actualizar_perfil");
 		var base_url = $("#base_url").val();
 		var def = this;
@@ -489,7 +529,7 @@ $(document).ready(function() {
 				} else if(json.res == "erroremail") {
 					$("#icon-email_forget").remove();
 					$(".errorform_recuperar_contraseña").css({"display":"block"});
-					$("#error_form_recuperar_contraseña").append(json.message);						
+					$("#error_form_recuperar_contraseña").append(json.message);
 
 				} else if(json.res == "fallo_db") {
 					$("#icon-email_forget").remove();
@@ -497,18 +537,18 @@ $(document).ready(function() {
 					$("#error_form_recuperar_contraseña").append(json.message);
 					setTimeout(function() {
 						window.location.replace(base_url +"Error404");
-					}, 3000);					
+					}, 3000);
 
 				} else if(json.res == "error_captcha") {
 					$("#icon-email_forget").remove();
 					$(".errorform_recuperar_contraseña").css({"display":"block"});
-					$("#error_form_recuperar_contraseña").append(json.message);					
+					$("#error_form_recuperar_contraseña").append(json.message);
 
 				} else if(json.res == "no_existe") {
 					$("#icon-email_forget").remove();
 					$(".errorform_recuperar_contraseña").css({"display":"block"});
 					$("#error_form_recuperar_contraseña").append(json.message);
-				
+
 				} else if(json.res == "enviado") {
 					$("#icon-email_forget").remove();
 					$(".errorform_recuperar_contraseña").css({"display":"block", "color":"green"});
@@ -574,7 +614,7 @@ $(document).ready(function() {
 				} else if(json.res == "error_captcha") {
 					$("#icon-password_new").remove();
 					$(".errorrecuperar_contraseña").css({"display":"block"});
-					$("#error_recuperar_contraseña").append(json.message);					
+					$("#error_recuperar_contraseña").append(json.message);
 
 				} else if(json.res == "fallo_db") {
 					$("#icon-password_new").remove();
@@ -611,6 +651,7 @@ $(document).ready(function() {
 // formulario reclamo
 $(document).ready(function() {
 	$('#form-user-claim').on("submit" , function(e) {
+
 		var cargando = $("#cargar_reclamo");
 		var base_url = $("#base_url").val();
 		var def = this;
@@ -624,6 +665,7 @@ $(document).ready(function() {
 		formData.append("id_parque_reclamo", $("#id_parque_reclamo").val());
 		formData.append("id_usuario_reclamo", $("#id_usuario_reclamo").val());
 		formData.append("tipo_reclamo", $("#tipo_reclamo").val());
+		formData.append("g-recaptcha-response", grecaptcha.getResponse());
 
 		$(".error_fileImagen").empty();
 		$(".error_comment").empty();
@@ -638,7 +680,7 @@ $(document).ready(function() {
 			$("#fileImagen").parent().parent().attr("class","form-group has-error has-feedback");
 			$('#fileImagen').parent().append("<span id='icon-fileImagen' class='glyphicon glyphicon-remove form-control-feedback'></span>");
 			cargando.fadeOut();
-		
+
 		} else {
 			$.ajax({
 				type: "POST",
@@ -651,7 +693,7 @@ $(document).ready(function() {
 				},
 
 				complete: function() {
-					if(json.res == "reclamo_registrado" || json.res == "error" || json.res == "error_reclamo" || json.res == "fallo_db" || json.res == "error_campos_vacios" || json.res == "error_vacio") {
+					if(json.res == "reclamo_registrado" || json.res == "error" || json.res == "error_reclamo" || json.res == "fallo_db" || json.res == "error_campos_vacios" || json.res == "error_vacio" || json.res == "error_captcha") {
 						cargando.fadeOut();
 					}
 				},
@@ -712,10 +754,13 @@ $(document).ready(function() {
 
 						} else if(json.res == "error_reclamo") {
 							$(".error_reclamo").append(json.message).css({"display":"block"});
-						
+
 						} else if(json.res == "error_campos_vacios") {
 							$(".error_reclamo").append(json.message).css({"display":"block"});
 
+						} else if(json.res == "error_captcha") {
+							$(".error_reclamo").append(json.message).css({"display":"block"});
+							grecaptcha.reset();
 						} else if(json.res == "reclamo_registrado") {
 							$(".reclamoRegistrado").append(json.message).css({"display":"block"}); // Se reutilizo el p de error en la ventana modal de reclamo
 							setTimeout(function() {
@@ -740,12 +785,12 @@ $(document).ready(function() {
 $(document).ready(function() {
 
 	$('#form-user-encuesta').on("submit" , function(e) {
-		
+
 		var cargando_encuesta = $("#cargar_encuesta");
 		var base_url = $("#base_url").val();
 		var def = this;
 		var json;
-		
+
 		$.ajax({
 			type: "POST",
 			url: $(this).attr("action"),
@@ -757,7 +802,6 @@ $(document).ready(function() {
 			},
 
 			complete: function() {
-				//console.log(json);
 				if(json.res == "enviado_encuesta"){
 					cargando_encuesta.css({"display":"none"});
 				}
@@ -770,7 +814,6 @@ $(document).ready(function() {
 			success: function(data) {
 
 				json = JSON.parse(data);
-				console.log(json);
 
 				$(".error_tipo_encuesta,.error_calificacion_encuesta,.error_encuesta, .enviado_encuesta").html("").css({"display":"none"});
 
@@ -809,16 +852,15 @@ $(document).ready(function() {
 				} if(json.res == "error_encuesta") {
 
 					$(".error_encuesta").append(json.message).css({"display":"block"});
-					
+
 				} if(json.res == "fallo_db") {
 
 					$(".error_encuesta").append(json.message).css({"display":"block"});
 					setTimeout(function() {
 						window.location.replace(base_url +"Error404");
-					}, 3000);					
-					
+					}, 3000);
+
 				} else if(json.res == "enviado_encuesta") {
-					//console.log(data);
 					$(".enviado_encuesta").append(json.message).css({"display":"block"});
 					setTimeout(function() {
 						window.location.replace(base_url);
@@ -830,7 +872,7 @@ $(document).ready(function() {
 			}
 
 		});
-		
+
 		e.preventDefault();
 
 	});
@@ -857,10 +899,9 @@ $(document).ready(function() {
 				},
 
 				complete: function() {
-					//console.log(json);
 					if(json.res == "enviado"){
 						cargando.css({"display":"none"});
-					} 
+					}
 
 					if(json.res == "error" || json.res == "error_resultado") {
 						cargando.fadeOut();
@@ -883,7 +924,7 @@ $(document).ready(function() {
 
 					} if(json.res == "error_resultado")	{
 						$('#resultado').children().remove();
-						$(".errorbarrio").append(json.message).css({"display":"block","font-weight": "bold", "color":"#d9534f"});	
+						$(".errorbarrio").append(json.message).css({"display":"block","font-weight": "bold", "color":"#d9534f"});
 
 					} else if(json.res == "exito") {
 						$('#resultado').children().remove();
@@ -891,7 +932,7 @@ $(document).ready(function() {
 						$(".errorbarrio").append(json.message).css({"display":"block","font-weight": "bold", "color":"green"});
 						const elementos = $("#resultado").children().length; // Contar elementos hijos
 						$.each(json.data, function(index, value) {
-							$('#resultado').html($('#resultado').html() +'<div class="panel panel-default"><div class="panel-heading"><a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel" href="#panel-element-'+ 
+							$('#resultado').html($('#resultado').html() +'<div class="panel panel-default"><div class="panel-heading"><a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel" href="#panel-element-'+
 								value.id_parque +'">'+ value.nombre +'</a></div>'+'<div id="panel-element-'+ value.id_parque +'" class="panel-collapse collapse"><a class="btn btn-primary btn-lg btn-block" style="color: #fff; background-color: #337ab7; border-color: #2e6da4;" href="'+ base_url +"busqueda/parque/"+ value.url_parque +"/"+ value.id_parque +'">Ver Parque</a>'+'</div>'+"</div>");
 						});
 					}
@@ -901,7 +942,7 @@ $(document).ready(function() {
 				}
 
 			});
-			
+
 			e.preventDefault();
 
 		});
@@ -930,7 +971,7 @@ $(document).ready(function() {
 				complete: function() {
 					if(json.res == "enviado"){
 						cargando.css({"display":"none"});
-					} 
+					}
 
 					if(json.res == "error" || json.res == "error_resultado") {
 						cargando.fadeOut();
@@ -940,7 +981,6 @@ $(document).ready(function() {
 				success: function(data) {
 
 					json = JSON.parse(data);
-					console.log(json);
 
 				 $(".errorcomuna").html("").css({"display":"none"});
 
@@ -950,11 +990,11 @@ $(document).ready(function() {
 							$(".errorcomuna").append(json.comuna).css({"display":"block"});
 							$("#buscar_comuna").parent().parent().attr("class","form-group has-error has-feedback");
 						}
-					
+
 					} if(json.res == "error_resultado")	{
 						$('#resultado_comuna').children().remove();
 						$(".errorcomuna").append(json.message).css({"display":"block","font-weight": "bold", "color":"#d9534f"});
-					
+
 					} else if(json.res == "exito") {
 						$('#resultado_comuna').children().remove();
 						$("#buscar_comuna").parent().parent().attr("class","form-group has-success has-feedback");
@@ -962,10 +1002,10 @@ $(document).ready(function() {
 						const elementos = $("#resultado_comuna").children().length;// Contar hijos
 
 						$.each(json.data, function(index, value) {
-							$('#resultado_comuna').html($('#resultado_comuna').html() +'<div class="panel panel-default"><div class="panel-heading"><a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel" href="#panel-element-'+ 
+							$('#resultado_comuna').html($('#resultado_comuna').html() +'<div class="panel panel-default"><div class="panel-heading"><a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel" href="#panel-element-'+
 								value.id_parque +'">'+ value.nombre +'</a></div>'+'<div id="panel-element-'+ value.id_parque +'" class="panel-collapse collapse"><a class="btn btn-primary btn-lg btn-block" style="color: #fff; background-color: #337ab7; border-color: #2e6da4;" href="'+ base_url +"busqueda/parque/"+ value.url_parque +"/"+ value.id_parque +'">Ver Parque</a>'+'</div>'+"</div>");
-						});							
-							
+						});
+
 					}
 				},
 
@@ -973,7 +1013,7 @@ $(document).ready(function() {
 				}
 
 			});
-			
+
 			e.preventDefault();
 
 		});
@@ -999,10 +1039,9 @@ $(document).ready(function() {
 			},
 
 			complete: function() {
-				//console.log(json);
 				if(json.res == "exito"){
 					cargando.css({"display":"none"});
-				} 
+				}
 
 				if(json.res == "error" || json.res == "error_resultado") {
 					cargando.fadeOut();
@@ -1022,7 +1061,7 @@ $(document).ready(function() {
 
 					$.each(json.data, function(index, value) {
 
-						$('#resultado_busqueda_personalizada').html($('#resultado_busqueda_personalizada').html() +'<div class="panel panel-default"><div class="panel-heading"><a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel" href="#panel-element-'+ 
+						$('#resultado_busqueda_personalizada').html($('#resultado_busqueda_personalizada').html() +'<div class="panel panel-default"><div class="panel-heading"><a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel" href="#panel-element-'+
 							value.id_parque +'">'+ value.nombre +'</a></div>'+'<div id="panel-element-'+ value.id_parque +'" class="panel-collapse collapse"><a class="btn btn-primary btn-lg btn-block" style="color: #fff; background-color: #337ab7; border-color: #2e6da4;" href="'+ base_url +"busqueda/parque/"+ value.url_parque +"/"+ value.id_parque +'">Ver Parque</a>'+'</div>'+"</div>");
 					});
 				} else if(json.res == "error_resultado") {
@@ -1035,7 +1074,7 @@ $(document).ready(function() {
 			}
 
 		});
-		
+
 		e.preventDefault();
 
 	});
@@ -1069,13 +1108,11 @@ $(document).ready(function() {
 
 				json = JSON.parse(data);
 
-				console.log(data);
-				
 				$(".erroremail_sesion,.errorcontraseña_sesion, .message_error_sesion").html("").css({"display":"none"});
 
 				if(json.res == "error") {
 
-					if(json.email_login) {				
+					if(json.email_login) {
 
 						$("#icon-email_login").remove();
 						$(".erroremail_sesion").append(json.email_login).css({"display":"block"});
@@ -1091,12 +1128,12 @@ $(document).ready(function() {
 					}
 
 					if(json.contraseña_login) {
-					
+
 						$("#icon-password_login").remove();
 						$(".errorcontraseña_sesion").append(json.contraseña_login).css({"display":"block"});
 						$("#password_login").parent().parent().attr("class","form-group has-error has-feedback");
 						$('#password_login').parent().append("<span id='icon-password_login' class='glyphicon glyphicon-remove form-control-feedback'></span>");
-					
+
 					} else {
 
 						$("#icon-password_login").remove();
@@ -1111,7 +1148,7 @@ $(document).ready(function() {
 
 						$("#icon-message_errorsesion").remove();
 						$(".message_error_sesion").css({"display":"block"});
-						$("#message_errorsesion").append(json.message);								
+						$("#message_errorsesion").append(json.message);
 					}
 
 				}else if(json.res == "sesion") {
@@ -1151,7 +1188,7 @@ $(document).ready(function() {
 
 		var emailOng = str = $("#email_ong").val().replace(/\s/g, "");// clean spaces
 		var emailComuna = str = $("#email_comuna").val().replace(/\s/g, ""); // clean spaces
-		
+
 		formData.append("fileDocumento", $('#fileDocumento')[0].files[0]);
 		formData.append("email_comuna", emailComuna);
 		formData.append("email_ong", emailOng);
@@ -1159,7 +1196,7 @@ $(document).ready(function() {
 
 		$("#comentario_reclamo_email").parent().parent().attr("class","form-group");
 		$("#icon-comentario_reclamo_email").remove();
-		
+
 		$.ajax({
 			type: "POST",
 			url: $(this).attr("action"),
@@ -1167,24 +1204,24 @@ $(document).ready(function() {
 			contentType: false,
 			processData: false,
 			cache: false,
-			
+
 			beforeSend: function(xhr, opts) {
-			
+
 				if(!word || word["type"] !== "application/vnd.openxmlformats-officedocument.wordprocessingml.document") {
 					$(".error_fileDocument").html("").css({"display":"none"});
 					$("#icon-fileDocumento").remove();
 					$(".error_fileDocument").append("<p>Debe seleccionar un documento .docx</p>").css({"display":"block"});
 					$("#fileDocumento").parent().parent().attr("class","form-group has-error has-feedback");
 					$('#fileDocumento').parent().append("<span id='icon-fileDocumento' class='glyphicon glyphicon-remove form-control-feedback'></span>");
-					cargando.fadeOut();	
+					cargando.fadeOut();
 					xhr.abort();
-				
+
 				} else {
-				
+
 					$("#icon-fileDocumento").remove();
 					$("#fileDocumento").parent().parent().attr("class","form-group has-success has-feedback");
 					$('#fileDocumento').parent().append("<span id='icon-fileDocumento' class='glyphicon glyphicon-ok form-control-feedback'></span>");
-					
+
 				}
 			},
 
@@ -1212,19 +1249,19 @@ $(document).ready(function() {
 						if(!json.documentFile) {
 							$("#icon-fileDocumento").remove();
 							$("#fileDocumento").parent().parent().attr("class","form-group has-success has-feedback");
-							$('#fileDocumento').parent().append("<span id='icon-fileDocumento' class='glyphicon glyphicon-ok form-control-feedback'></span>");								
+							$('#fileDocumento').parent().append("<span id='icon-fileDocumento' class='glyphicon glyphicon-ok form-control-feedback'></span>");
 
 						} else {
 							$(".error_fileDocument").html("").css({"display":"none"});
 							$("#icon-fileDocumento").remove();
 							$(".error_fileDocument").append(json.documentFile).css({"display":"block"});
 							$("#fileDocumento").parent().parent().attr("class","form-group has-error has-feedback");
-							$('#fileDocumento').parent().append("<span id='icon-fileDocumento' class='glyphicon glyphicon-remove form-control-feedback'></span>");								
+							$('#fileDocumento').parent().append("<span id='icon-fileDocumento' class='glyphicon glyphicon-remove form-control-feedback'></span>");
 						}
 
 					} if(json.res == "fallo_db") {
 						$(".errorform_enviar_reclamo_documento_email").append(json.message).css({"display":"block", "color":"#d9534f"});;
-					
+
 					} else if(json.res == "error_destinatario") {
 						$(".errorform_enviar_reclamo_documento_email").append(json.message).css({"display":"block", "color":"#d9534f"});
 
@@ -1236,10 +1273,10 @@ $(document).ready(function() {
 						setTimeout(function() {
 							window.location.reload();
 						}, 2000);
-					
+
 					} else if(json.res == "fallo_actualizar") {
 						$(".errorform_enviar_reclamo_documento_email").append(json.message).css({"display":"block", "color":"#d9534f"}); // Se reutilizo el p de error en la ventana modal de reclamo
-					
+
 					} else if(json.res == "error_perfil") {
 						$(".errorform_enviar_reclamo_documento_email").append(json.message).css({"display":"block", "color":"#d9534f"}); // Se reutilizo el p de error en la ventana modal de reclamo
 						setTimeout(function() {
@@ -1252,109 +1289,7 @@ $(document).ready(function() {
 			error: function (xhr , exception) {
 			}
 
-	
-		});
 
-		e.preventDefault();
-	});
-
-});
-
-
-
-// formulario reclamo
-$(document).ready(function() {
-	$('#form-admin-crear-parque').on("submit" , function(e) {
-		var cargando = $("#cargar_form_cargar_parque_excel");
-		var base_url = $("#base_url").val();
-		var def = this;
-		var json;
-		var excel = $('#fileExcel')[0].files[0];
-
-		var formData = new FormData();
-
-		formData.append("fileExcel", $('#fileExcel')[0].files[0]);
-
-		$(".errorform_enviar_reclamo_documento_email").empty();
-
-		console.log(excel);
-
-		$.ajax({
-			type: "POST",
-			url: $(this).attr("action"),
-			data: formData,
-			contentType: false,
-			processData: false,
-			cache: false,
-			
-			beforeSend: function(xhr, opts) {
-			
-				if(!excel || excel["type"] !== "application/vnd.ms-excel") {
-					$(".error_fileExcel").html("").css({"display":"none"});
-					$("#icon-fileExcel").remove();
-					$(".error_fileExcel").append("<p>Debe seleccionar un documento .csv</p>").css({"display":"block"});
-					$("#fileExcel").parent().parent().attr("class","form-group has-error has-feedback");
-					$('#fileExcel').parent().append("<span id='icon-fileExcel' class='glyphicon glyphicon-remove form-control-feedback'></span>");
-					cargando.fadeOut();	
-					xhr.abort();
-				
-				} else {
-				
-					$("#icon-fileExcel").remove();
-					$("#fileExcel").parent().parent().attr("class","form-group has-success has-feedback");
-					$('#fileExcel').parent().append("<span id='icon-fileExcel' class='glyphicon glyphicon-ok form-control-feedback'></span>");
-					
-				}
-			},
-
-			complete: function() {
-				if(json.res == "excel_guardado" || json.res == "error"  || json.res == "error_guardar" || json.res == "error_perfil") {
-					cargando.fadeOut();
-				}
-			},
-
-			success: function(data) {
-
-				json = JSON.parse(data);
-				$(".error_fileExcel, .errorform_enviar_reclamo_documento_email").html("").css({"display":"none"});
-
-					if(json.res == "error")	{
-
-						if(!json.documentFile) {
-							$("#icon-fileExcel").remove();
-							$("#fileExcel").parent().parent().attr("class","form-group has-success has-feedback");
-							$('#fileExcel').parent().append("<span id='icon-fileExcel' class='glyphicon glyphicon-ok form-control-feedback'></span>");								
-
-						} else {
-							$(".error_fileExcel").html("").css({"display":"none"});
-							$("#icon-fileExcel").remove();
-							$(".error_fileExcel").append(json.documentFile).css({"display":"block"});
-							$("#fileExcel").parent().parent().attr("class","form-group has-error has-feedback");
-							$('#fileExcel').parent().append("<span id='icon-fileExcel' class='glyphicon glyphicon-remove form-control-feedback'></span>");								
-						}
-
-					} if(json.res == "error_guardar") {
-						$(".errorform_enviar_reclamo_documento_email").append(json.message).css({"display":"block", "color":"#d9534f"});;
-					
-					} else if(json.res == "excel_guardado") {
-						$(".errorform_enviar_reclamo_documento_email").append(json.message).css({"display":"block", "color":"green"}); // Se reutilizo el p de error en la ventana modal de reclamo
-						setTimeout(function() {
-							window.location.reload();
-						}, 2000);
-					
-					} else if(json.res == "error_perfil") {
-						$(".errorform_enviar_reclamo_documento_email").append(json.message).css({"display":"block", "color":"#d9534f"}); // Se reutilizo el p de error en la ventana modal de reclamo
-						setTimeout(function() {
-							window.location.replace(base_url);
-						}, 2000);
-					}
-
-				},
-
-			error: function (xhr , exception) {
-			}
-
-	
 		});
 
 		e.preventDefault();

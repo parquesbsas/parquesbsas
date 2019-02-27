@@ -48,7 +48,7 @@
 							</div>
 						</div>
 
-					  <!--			
+					  <!--
 						<div class="form-group">
 							<div class="input-group">
 								<input id="buscar_parque" name="buscar_parque" type="text" class="form-control" placeholder="Buscar parque...">
@@ -72,9 +72,9 @@
 									<li class="divider"></li>
 									<li> <a href="<?=base_url()?>reclamo/enviarEmail" data-toggle="modal">Enviar Email Documento</a> </li>
 									<li class="divider"></li>
-									<li><a href="<?=base_url()?>administrador">Actualizar Administradores</a></li>								
+									<li><a href="<?=base_url()?>administrador">Actualizar Administradores</a></li>
 									<li class="divider"></li>
-									<li><a href="<?=base_url()?>parques/crear">Crear/Actualizar Parques</a></li>								
+									<li><a href="<?=base_url()?>parques/editar">Crear/Administrar Parques</a></li>
 									<li class="divider"></li>
 								<?}?>
 								<li> <a href="" id="modal_delete_user" data-toggle="modal">Eliminar Cuenta</a> </li>
@@ -105,7 +105,7 @@
 					<h4 class="modal-title" style="color: #000000;">
 						<img height="30" alt="Brand" src="<?=base_url('public/img').'/'.$logo?>"> Iniciar Sesion
 					</h4>
-				
+
 				</div>
 
 				<div class="modal-body">
@@ -130,7 +130,7 @@
 							<img  style="width:300px; height:48px;" alt="Brand" class="img-responsive" src="<?=base_url("public/img/google.png")?>">
 						</a>
 					</div>
-					
+
 					<br>
 
 					<div style="color: #000000;height: 30px;">
@@ -147,7 +147,7 @@
 						<p id="cargar_sesion"><font style="font-size:15px;font-weight: bold;" color="green">Cargando....</font></p>
 					</div>
 
-				</div>	
+				</div>
 
 				<div class="modal-footer">
 					<button type="submit" class="btn btn-default" onclick="cargando_sesion()">Ingresar</button>

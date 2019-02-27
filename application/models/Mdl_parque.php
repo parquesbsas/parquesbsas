@@ -236,6 +236,51 @@ class MDL_Parque extends CI_Model {
 		return true;
 	}
 
+	public function crear() {
+
+		$saveImage = $this->guardarImagen();
+
+		if(!empty($saveImage["file_name"])) {
+
+			$this->imagen = $saveImage["file_name"];
+			$this->imagenAndroid = $saveImage["file_name"];
+
+			$sql = "INSERT INTO $this->tabla (nombre, descripcion, direccion, id_barrio, id_comuna, url_parque, patio_juegos, id_wifi, imagen, imagen_android, latitud, longitud, activo) VALUES(". $this->db->escape($this->nombre) .", ". $this->db->escape($this->descripcion) .", ". $this->db->escape($this->direccion) .", ". $this->db->escape_str($this->idBarrio) .", ". $this->db->escape_str($this->idComuna) .", ". $this->db->escape($this->urlParque) .", ". $this->db->escape_str($this->patioJuegos) .", ". $this->db->escape_str($this->idWifi) .", ". $this->db->escape($this->imagen) .", ". $this->db->escape($this->imagenAndroid) .", ". $this->db->escape($this->latitud) .", ". $this->db->escape($this->longitud) .", 1);";
+
+			if($this->db->query($sql)) {
+				return true;
+			} else {
+				return false;
+			}
+
+		} elseif(is_string($saveImage)) {
+			$message = filter_var($saveImage, FILTER_SANITIZE_STRING);
+			return htmlspecialchars($message, ENT_QUOTES, 'UTF-8');
+		}
+		return false;
+	}
+
+	protected function guardarImagen() {
+
+		$config["encrypt_name"] = TRUE;
+		$config["upload_path"] = "./public/img/parques";
+		$config["allowed_types"] = "jpg|JPEG|jpeg";
+		$config["max_size"] = "2048";
+		$config["max_width"] = "1680";
+		$config["max_height"] = "1054";
+
+		$this->load->library("upload", $config);
+
+		$this->upload->initialize($config);
+
+		if(!$this->upload->do_upload("crearParqueImagen")) {
+			return $this->upload->display_errors();
+		} else {
+			return $this->upload->data();
+		}
+		return false;
+	}
+
 }
 
 ?>

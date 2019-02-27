@@ -80,7 +80,7 @@ class Contacto extends CI_Controller {
 			echo json_encode($data);
 
 		} else {
-			show_404();
+			return redirect(base_url()."Error404");
 		}
 	}
 

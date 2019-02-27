@@ -63,7 +63,7 @@ class Recuperar_contrasena extends MY_Util {
 			echo json_encode($dataResponse);
 
 		} else {
-			show_404();
+			return redirect(base_url()."Error404");
 		}
 	}
 
@@ -114,7 +114,7 @@ class Recuperar_contrasena extends MY_Util {
 			$this->load->view("/guest/footer");
 
 		} else {
-			redirect(base_url()."Error404");
+			return redirect(base_url()."Error404");
 		}
 	}
 
@@ -161,7 +161,7 @@ class Recuperar_contrasena extends MY_Util {
 
 			echo json_encode($dataResponse);
 	  } else {
-			show_404();
+			return redirect(base_url()."Error404");
 		}
 	}
 

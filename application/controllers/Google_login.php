@@ -10,29 +10,29 @@ class Google_login extends CI_Controller {
 	}
 
 	public function index() {
-		
+
 		//redirect to profile page if user already logged in
 		if($this->session->userdata("login") == true && $this->session->userdata("google") == true) {
 			return redirect(base_url());
 		}
-	
+
 		if(isset($_GET["code"])) {
-			
+
 			//authenticate user , return access_token , id_token, scope
 			$googleToken = $this->google->getAuthenticate();
 
 			if(empty($googleToken)) {
-				return redirect(base_url()."Error404");
+				return redirect(base_url()."error/value/409");
 			}
-			
+
 			//get user info from google
 			$infoUserGoogle = $this->google->getUserInfo();
 			$validarUsuarioGoogle = $this->validarUsuarioGoogle($infoUserGoogle);
 
 			if(empty($validarUsuarioGoogle)) {
-				return redirect(base_url()."Error404");
+				return redirect(base_url()."error/value/409");
 			}
-			
+
 			//preparing data for database insertion
 			$userData["oauth_provider"]	= "google";
 			$userData["oauth_uid"]		= $infoUserGoogle["id"]; // id google
@@ -50,7 +50,7 @@ class Google_login extends CI_Controller {
 			$result = $this->mdl_usuario->registroGoogle();
 
 			if(!empty($result)) {
-				
+
 				$data = array(
 					"user" => $userData["email"],
 					"id" => $result->id_usuario,
@@ -63,14 +63,14 @@ class Google_login extends CI_Controller {
 
 				$this->session->set_userdata($data);
 				return redirect(base_url());
-			
+
 			}
 
 			//redirect to profile page
 			return redirect(base_url()."Error404");
 			//redirect("http://localhost/parquesbsas");
 		}
-		
+
 		//google login url
 		//$data["loginURL"] = $this->google->loginURL();
 		//return $data["loginURL"];
@@ -83,9 +83,9 @@ class Google_login extends CI_Controller {
 		}
 
 		$loginData = $this->session->userdata();
-		
+
 		if(!empty($loginData["login"]) && $loginData["user"] == $infoUserGoogle["email"]) {
-			return true;	
+			return true;
 		}
 
 		return empty($loginData["login"]) ? true : false;
