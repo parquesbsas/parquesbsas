@@ -60,7 +60,7 @@ class Sesion extends MY_Util {
 
 					$data = array(
 						"res" => "sesion",
-						"message" => "Bienvenido"
+						"message" => "Bienvenido ". $user->nombre ." ". $user->apellido
 					);
 
 				} else {

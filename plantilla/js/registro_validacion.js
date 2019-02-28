@@ -1082,8 +1082,6 @@ $(document).ready(function() {
 });
 
 
-
-// SCRIPT PARA VALIDAR REENVIO DE ACTIVACION DE EMAIL ***** FALTA COMPLETAR
 $(document).ready(function() {
 	$('#form_sesion').on("submit" , function(e) {
 		var cargando = $("#cargar_sesion");
@@ -1155,7 +1153,7 @@ $(document).ready(function() {
 
 					$("#icon-message_errorsesion").remove();
 					$(".message_error_sesion").css({"display":"block"});
-					$(".message_error_sesion").css({"display":"block", "color":"green"});
+					$(".message_error_sesion").css({"display":"block", "color":"green", "text-align":"center", "font-size":"18px"});
 					$("#message_errorsesion").append(json.message);
 					setTimeout(function() {
 						window.location.replace(base_url);

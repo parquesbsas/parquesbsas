@@ -11,6 +11,7 @@ class Reclamo extends MY_Util {
 		$this->load->model("mdl_reclamo");
 		$this->load->library("My_PHPMailer");
 		$this->load->library("recaptcha");
+		$this->load->library("encrypt");
 	}
 
 	public function index() {
@@ -43,14 +44,11 @@ class Reclamo extends MY_Util {
 			$this->form_validation->set_message('min_length' ,'El campo %s no puede tener menos de %s caracteres.');
 			$this->form_validation->set_message('max_length' , 'El campo %s no puede tener mas de %s caracteres.');
 
-			//$imagenPost2 = $this->input->post("fileImagen");
 			$comentarioPost = $this->input->post("comentario");
 			$idParquePost = $this->input->post("id_parque_reclamo");
 			$idUsuarioPost = $this->input->post("id_usuario_reclamo");
 			$tipoReclamoPost = $this->input->post("tipo_reclamo");
 			$imagenPost = empty($_FILES["fileImagen"]["name"]) ? null : $_FILES["fileImagen"]["name"];
-
-			//var_dump($comentarioPost, $idUsuarioPost, $idUsuarioPost, $tipoReclamoPost, $imagenPost);die;
 
 			if(empty($comentarioPost) && empty($idParquePost) && empty($idUsuarioPost) && empty($tipoReclamoPost) && empty($imagenPost)) {
 				$data = array(
@@ -78,37 +76,49 @@ class Reclamo extends MY_Util {
 						);
 
 					} else {
-						$this->mdl_reclamo->idParque = $idParquePost;
-						$this->mdl_reclamo->idUsuario = $idUsuarioPost;
-						$this->mdl_reclamo->idReclamo = $tipoReclamoPost;
-						$this->mdl_reclamo->imagen = $imagenPost;
-						$this->mdl_reclamo->comentario = $comentarioPost;
 
-						$result = $this->mdl_reclamo->guardarReclamo();
+						$usuario = $this->mdl_usuario->mostrarPerfil($idUsuarioPost);
 
-						if($result === true) {
-							$data = array(
-								"res" => "reclamo_registrado",
-								"message" => "Se registro el reclamo correctamente."
-							);
-
-						} elseif(is_null($result)) {
-							$data = array(
-								"res" => "error_campos_vacios",
-								"message" => "Algunos campos se encuentra vacios, si el problema persiste envianos un mail en el formulario de contacto."
-							);
-
-						} elseif($result == false) {
-							$data = array(
-								"res" => "fallo_db",
-								"message" => "Ocurrio un error al intentar registrar los datos del formulario."
-							);
-
-						} elseif(is_string($result)) {
+						if(empty($usuario->id_tipo_documento) || empty($usuario->numero_documento)) {
 							$data = array(
 								"res" => "error_reclamo",
-								"message" => $result
+								"message" => "Asegurese de completar su tipo y numero de documento."
 							);
+
+						} else {
+
+							$this->mdl_reclamo->idParque = $idParquePost;
+							$this->mdl_reclamo->idUsuario = $idUsuarioPost;
+							$this->mdl_reclamo->idReclamo = $tipoReclamoPost;
+							$this->mdl_reclamo->imagen = $imagenPost;
+							$this->mdl_reclamo->comentario = $comentarioPost;
+
+							$result = $this->mdl_reclamo->guardarReclamo();
+
+							if($result === true) {
+								$data = array(
+									"res" => "reclamo_registrado",
+									"message" => "Se registro el reclamo correctamente."
+								);
+
+							} elseif(is_null($result)) {
+								$data = array(
+									"res" => "error_campos_vacios",
+									"message" => "Algunos campos se encuentra vacios, si el problema persiste envianos un mail en el formulario de contacto."
+								);
+
+							} elseif($result == false) {
+								$data = array(
+									"res" => "fallo_db",
+									"message" => "Ocurrio un error al intentar registrar los datos del formulario."
+								);
+
+							} elseif(is_string($result)) {
+								$data = array(
+									"res" => "error_reclamo",
+									"message" => $result
+								);
+							}
 						}
 					}
 				}
