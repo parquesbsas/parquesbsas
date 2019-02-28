@@ -281,6 +281,82 @@ class MDL_Parque extends CI_Model {
 		return false;
 	}
 
+	public function obtenerEmailOngs() {
+
+		$sqlOng = "SELECT o.id_ong, o.nombre_ong, o.nombre_referente, o.apellido_referente, o.email_ong, o.email_referente, o.telefono_ong, o.telefono_referente, b.descripcion as barrio, o.id_barrio
+				FROM ongs o LEFT JOIN barrios b ON o.id_barrio = b.id_barrio";
+
+		if(empty($this->db->query($sqlOng))) {
+			return false;
+		}
+
+		$ongs = $this->db->query($sqlOng)->result();
+
+		if(empty($ongs)) {
+			return false;
+		}
+
+		$idsBarrio = null;
+		$ongsOrdenado = array();
+
+		foreach($ongs as $ong) {
+
+			if(empty($ongsOrdenado[$ong->barrio])) {
+				$ongsOrdenado[$ong->barrio] = new stdClass();
+				$ongsOrdenado[$ong->barrio]->ongs = array();
+				$ongsOrdenado[$ong->barrio]->parques = null;
+			}
+
+			$ongsOrdenado[$ong->barrio]->ongs[] = $ong;
+
+			if(empty($idsBarrio)) {
+				$idsBarrio = $ong->id_barrio;
+
+			} else {
+				$idsBarrio .= ", ". $ong->id_barrio;
+			}
+		}
+
+		$idsBarrioArray = explode(", ", $idsBarrio);
+
+		$idsBarrioSql = [];
+
+		foreach($idsBarrioArray as $key => $idBarrio) {
+			$idsBarrioSql[$idBarrio] = $key;
+		}
+
+		$idsBarrioSql = array_flip($idsBarrioSql);
+		$idsBarrioSql = implode(", ", $idsBarrioSql);
+
+		$sqlParques = "SELECT p.nombre, b.descripcion as barrio FROM $this->tabla p LEFT JOIN barrios b ON p.id_barrio = b.id_barrio where p.id_barrio in ($idsBarrioSql) AND p.activo <> 0 OR p.activo <> null";
+
+		if(empty($this->db->query($sqlParques))) {
+			return false;
+		}
+
+		$parques = $this->db->query($sqlParques)->result();
+
+		if(empty($parques)) {
+			return false;
+		}
+
+		foreach($parques as $parque) {
+
+			if(!empty($ongsOrdenado[$parque->barrio])) {
+
+				$ongsOrdenado[$parque->barrio]->parques = !empty($ongsOrdenado[$parque->barrio]->parques) ? $ongsOrdenado[$parque->barrio]->parques : $parque->nombre;
+
+				if(strpos($ongsOrdenado[$parque->barrio]->parques, $parque->nombre) !== false) {
+					continue;
+				}
+
+				$ongsOrdenado[$parque->barrio]->parques .= ", ". $parque->nombre;
+			}
+
+		}
+
+		return $ongsOrdenado;
+	}
 }
 
 ?>

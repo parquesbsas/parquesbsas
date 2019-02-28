@@ -142,3 +142,12 @@ $(document).ready(function() {
 	});
 	return false;
 });
+
+$(document).ready(function() {
+	$('#mod_ongs').click(function(e) {
+		document.getElementById("body_mod").style.paddingRight="0px"; /// USAR SIEMPRE SINO SE DESACOMODA
+		$('#modal_ongs').modal('show');
+		document.getElementById("body_mod").style.paddingRight="0px"; /// USAR SIEMPRE SINO SE DESACOMODA
+	});
+	return false;
+});

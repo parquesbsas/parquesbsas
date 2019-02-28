@@ -295,7 +295,8 @@ class Reclamo extends MY_Util {
 			$this->load->view("/guest/head",$data);
 			$data['logo']= 'logo.png';
 			$this->load->view("/guest/nav",$data);
-			$this->load->view("/user/formulario_enviar_documento");
+			$data["ongsBarrios"] = $this->mdl_parque->obtenerEmailOngs();
+			$this->load->view("/user/formulario_enviar_documento", $data);
 			$this->load->view("/guest/footer");
 		}
 	}
