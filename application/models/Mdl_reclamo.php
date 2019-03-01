@@ -131,12 +131,10 @@ class MDL_Reclamo extends CI_Model {
 
 	public function obtenerReclamoPlanilla() {
 
-		date_default_timezone_set('America/Argentina/Buenos_Aires');
-		$hoy = "2019-02-28";
-		$inicio = "2019-02";
+		date_default_timezone_set("America/Argentina/Buenos_Aires");
 
-		//$hoy = date("Y-m-d H:i:s");
-		//$inicio = date("Y-m");
+		$hoy = date("Y-m-d H:i:s");
+		$inicio = date("Y-m");
 
 		$resultQuery = $this->db->query("SELECT count(id_reclamo) cantidad , id_reclamo , id_parque FROM $this->tablaUsuarioReclamoParque WHERE id_estado = 1 AND fecha_creacion <= '$hoy' AND fecha_creacion > '$inicio' GROUP BY id_parque, id_reclamo;")->result();
 
@@ -147,7 +145,7 @@ class MDL_Reclamo extends CI_Model {
 		$reclamoMayor = array_search(max($resultQuery), $resultQuery);
 		$reclamo = $resultQuery[$reclamoMayor];
 
-		if($reclamo->cantidad < 0) {
+		if($reclamo->cantidad > 30) {
 			$this->expirarReclamos();
 			return null;
 		}
