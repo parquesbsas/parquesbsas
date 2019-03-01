@@ -254,7 +254,9 @@ class MDL_Reclamo extends CI_Model {
 
 	public function mostrarReclamo($idReclamo) {
 
-		if(!empty($idReclamo)) {
+		$idUsuario = !empty($this->session->id) ? $this->session->id : null;
+
+		if(!empty($idReclamo) && !empty($idUsuario)) {
 
 			$resultQuery = $this->db->query("
 				SELECT urp.id_usuario_reclamo_parque, r.descripcion as reclamo_decripcion, p.nombre as parque_nombre , re.descripcion, urp.comentarios, urp.fecha_creacion, urp.imagen, urp.latitud, urp.longitud
@@ -262,7 +264,8 @@ class MDL_Reclamo extends CI_Model {
 				LEFT JOIN parques p ON p.id_parque = urp.id_parque
 				LEFT JOIN reclamos r ON r.id_reclamo = urp.id_reclamo
 				LEFT JOIN reclamos_estado re ON re.id_estado = urp.id_estado
-				WHERE urp.id_usuario_reclamo_parque = ". $this->db->escape($idReclamo) .""
+				WHERE urp.id_usuario_reclamo_parque = ". $this->db->escape($idReclamo) ."
+				AND urp.id_usuario = ". $this->db->escape($idUsuario) .""
 			);
 
 			return !empty($resultQuery->row()) ? $resultQuery->row() : null;
