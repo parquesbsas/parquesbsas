@@ -131,19 +131,21 @@ class Reclamo extends MY_Util {
 
 	public function detalle($idReclamo = null) {
 
-		if(!empty($idReclamo)) {
-			$data["info"]= " | Detalle";
-			$this->load->view("/guest/head",$data);
-			$data['logo']= 'logo.png';
-			$this->load->view("/guest/nav",$data);
+		if(!empty($idReclamo) && !empty($this->session->id)) {
+			$data["info"] = " | Detalle";
+			$this->load->view("/guest/head", $data);
+			$data["logo"] = "logo.png";
+			$this->load->view("/guest/nav", $data);
 			$reclamo = $this->mdl_reclamo->mostrarReclamo($idReclamo);
 
 			if(empty($reclamo)) {
 				redirect(base_url()."Error404");
 			}
+
 			$reclamo = array("reclamo" => $reclamo);
 			$this->load->view("/user/info_reclamo", $reclamo);
 			$this->load->view("/guest/footer");
+
 		} else {
 			return redirect(base_url()."Error404");
 		}
